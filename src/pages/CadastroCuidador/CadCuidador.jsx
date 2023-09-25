@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, TouchableOpacity, StyleSheet } from 'react-native';
+import { View, Text, TextInput, TouchableOpacity, StyleSheet, Dimensions, Button } from 'react-native';
 import * as yup from 'yup';
-
 import { useNavigation } from '@react-navigation/native';
 
 // Importe o hook useFormContext do seu contexto (FormContext)
@@ -15,6 +14,9 @@ const schema = yup.object().shape({
   dataNascimento: yup.string().required("Digite a Data de Nascimento").matches(/^(0[1-9]|[12][0-9]|3[01])\/(0[1-9]|1[0-2])\/\d{4}$/, "Digite uma data válida (dd/mm/yyyy)"),
 });
 
+const windowWidth = Dimensions.get('window').width;
+const windowHeight = Dimensions.get('window').height;
+
 const CadastroCuidador = () => {
   const [dataNascimento, setDataNascimento] = useState('');
   const [nomeComp, setNomeComp] = useState('');
@@ -23,6 +25,7 @@ const CadastroCuidador = () => {
   const [telefoneRes, setTelefoneRes] = useState('');
   const [errors, setErrors] = useState({});
   const [formSubmitted, setFormSubmitted] = useState(false);
+  const [isFocused, setIsFocused] = useState(false);
 
   // Use o hook useFormContext para acessar o contexto e as funções relacionadas ao formulário
   const { updateFormData } = useFormContext();
@@ -78,18 +81,32 @@ const CadastroCuidador = () => {
     setDataNascimento(formattedDate);
   };
 
+  const switchPage = () => {
+    navigation.navigate('Login');
+  }
+
+  const handleFocus = () => {
+    setIsFocused(true);
+  }
+
+  const handleBlur = () => {
+    setIsFocused(false);
+  }
+
   return (
     <View style={styles.container}>
       <Text style={styles.titulo}> Cadastre-se</Text>
       <Text style={styles.subTitulo}>Crie uma conta para continuar</Text>
       <View style={styles.form}>
         <TextInput
-          style={[styles.input, (errors.nomeComp && formSubmitted) && styles.inputError]}
+          style={[styles.input, (errors.nomeComp && formSubmitted) && styles.inputError && isFocused && styles.inputFocused ]}
           placeholder="Nome Completo"
           underlineColorAndroid={'#7f7f7f'}
           placeholderTextColor={'#7f7f7f'}
           onChangeText={(text) => setNomeComp(text)}
           value={nomeComp}
+          onFocus={handleFocus}
+          onBlur={handleBlur}
         />
         {(errors.nomeComp && formSubmitted) && <Text style={styles.labelError}> {errors.nomeComp} </Text>}
 
@@ -130,9 +147,16 @@ const CadastroCuidador = () => {
         />
         {(errors.telefoneRes && formSubmitted) && <Text style={styles.labelError}> {errors.telefoneRes} </Text>}
 
-        <TouchableOpacity onPress={handleCadastro}>
-          <Text> Próximo </Text>
+        <TouchableOpacity onPress={handleCadastro} style={styles.nextButton}>
+          <Text style={styles.buttonText}> Próximo </Text>
         </TouchableOpacity>
+
+        <Text style={styles.textLogin}>Já possui uma conta?
+          <TouchableOpacity onPress={switchPage} style={styles.loginButton}>
+            Fazer login
+          </TouchableOpacity>
+        </Text>
+
       </View>
     </View>
   );
@@ -141,42 +165,80 @@ const CadastroCuidador = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#2f56b6',
+    backgroundColor: '#4682B4',
     justifyContent: 'center',
-    padding: 20,
   },
+
   form: {
     backgroundColor: '#fff',
     flex: 1,
-    borderRadius: 10,
-    padding: 20,
+    borderTopLeftRadius: 35,
+    borderTopRightRadius: 35,
+    padding: windowWidth * 0.05,
   },
+
   titulo: {
-    fontSize: 22,
+    fontSize: windowWidth * 0.06, 
     color: '#fff',
     textAlign: 'center',
+    marginTop: '8%',
+    fontFamily: 'Arial'
   },
+
   subTitulo: {
-    fontSize: 18,
-    color: '#fff',
-    marginTop: 5,
+    fontSize: windowWidth * 0.045, 
+    color: '#fff', 
     textAlign: 'center',
-    marginBottom: 20,
+    marginBottom: windowHeight * 0.07, 
+    fontFamily: 'Arial'
   },
+
   input: {
-    height: 40,
+    height: windowHeight * 0.05,
     borderColor: 'gray',
-    borderWidth: 1,
-    marginBottom: 10,
-    paddingHorizontal: 10,
+    borderWidth: 0,
+    marginBottom: windowHeight * 0.01, 
+    paddingHorizontal: windowWidth * 0.03,
+    borderBottomWidth: 1
   },
+
+  inputFocused: {
+    borderColor: 'white',
+  },
+
   inputError: {
     borderColor: '#ff375b',
   },
+
   labelError: {
     color: '#ff375b',
-    marginBottom: 8,
+    marginBottom: windowHeight * 0.02, 
   },
+
+  loginButton: {
+    marginLeft: 5,
+    color: 'blue'
+  },
+
+  textLogin: {
+    fontSize: windowWidth * 0.045,
+    fontFamily: 'Arial'
+  },
+
+  buttonText: {
+    color: 'blue',          // Texto azul (mesma cor da borda)
+    textAlign: 'center',
+  },
+  
+  nextButton: {
+    backgroundColor: 'white', // Fundo branco
+    borderColor: 'blue',     // Bordas azuis
+    borderRadius: 10,        // Borda arredondada
+    borderWidth: 2,         // Largura da borda
+    padding: 10,
+    marginTop: 35,
+  }
+
 });
 
 export default CadastroCuidador;
