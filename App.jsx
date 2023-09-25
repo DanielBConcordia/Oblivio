@@ -7,6 +7,8 @@ import { FormProvider } from './src/Contexts/FormContext';
 import CadastroCuidador from './src/pages/CadastroCuidador/CadCuidador';
 import CadastroCuidador2 from './src/pages/CadastroCuidador/CadCuidador2';
 import CadastroCuidador3 from './src/pages/CadastroCuidador/CadCuidador3';
+import TesteCorrect from './src/pages/TesteCorrect/TesteCorrect';
+import Login from './src/pages/Login/Login';
 
 const Stack = createNativeStackNavigator();
 
@@ -15,10 +17,13 @@ export default function App(){
    <FormProvider>
      <NavigationContainer>
       <Stack.Navigator>
-        <Stack.Screen name="CadastroCuidador" component={CadastroCuidador} />
-        <Stack.Screen name="CadastroCuidador2" component={CadastroCuidador2} />
-        <Stack.Screen name="CadastroCuidador3" component={CadastroCuidador3} />
+        <Stack.Screen name="CadastroCuidador" component={CadastroCuidador} options={{ title: "", headerShown: false }}/>
+        <Stack.Screen name="CadastroCuidador2" component={CadastroCuidador2} options={{ title: "", headerShown: false }} />
+        <Stack.Screen name="CadastroCuidador3" component={CadastroCuidador3} options={{ title: "", headerShown: false }} />
+        <Stack.Screen name="TesteCorrect" component={TesteCorrect} options={{ title: "", headerShown: false }} />
+        <Stack.Screen name="Login" component={Login} options={{ title: "", headerShown:false }} />
       </Stack.Navigator>
+
     </NavigationContainer>
    </FormProvider> 
   );

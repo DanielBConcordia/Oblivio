@@ -1,113 +1,132 @@
-import React from 'react-native';
-import { View, TouchableOpacity, Text, TextInput, StyleSheet } from 'react-native';
-import { useState } from "react-native";
-
-import {useForm, Controller} from 'react-hook-form';
-import { yupResolver } from '@hookform/resolvers/yup';
+import React, { useState } from 'react';
+import { View, Text, TextInput, TouchableOpacity, StyleSheet, Dimensions } from 'react-native';
 import * as yup from 'yup';
+import { useNavigation } from '@react-navigation/native';
 
-//Verificação se o campo está preenchido
-const schema = yup.object({
-    email: yup.string().email("Email Inválido").required("Digite seu email"),
-    senha: yup.string().min(6, "A senha deve ter pelo menos 6 digitos").required("Digite sua senha"),
-    apelido: yup.string().required("Digite como quer ser chamado"),
- 
+import { useFormContext } from '../../Contexts/FormContext';
+
+const schema = yup.object().shape({
+    email: yup.string().email().required("Digite o seu Email"),
+    senha: yup.string().required("Digite o sua Senha"),
+    apelido: yup.string().max(50)
 });
 
+const windowWidth = Dimensions.get('window').width;
+const windowHeight = Dimensions.get('window').height;
 
 const CadastroCuidador3 = () => {
+    const [email, setEmail] = useState('');
+    const [senha, setSenha] = useState('');
+    const [apelido, setApelido] = useState('');
+    const [errors, setErrors] = useState({});
+    const [formSubmitted, setFormSubmitted] = useState(false);
+    
+    const { updateFormData } = useFormContext();
+    const navigation = useNavigation();
 
-    const { control, handleSubmit, formState: { errors } } = useForm({
-        resolver : yupResolver(schema)
-    })
+    const handleCadastro3 = () => {
+        setFormSubmitted(true);
 
-    function handleSignIn(data) {
-       console.log(data);
+        schema
+            .validate({ email, senha, apelido })
+            .then(() => {
+                const userData = {
+                    email,
+                    senha,
+                    apelido
+                };
+
+                updateFormData(userData);
+                navigation.navigate('TesteCorrect');
+                console.log('Dados Finais em JSON:', userData);
+                setErrors({});
+            })
+            .catch((error) => {
+                setErrors({ [error.path]: error.message});
+            });
     }
 
-    return(
+    return (
         <View style={styles.container}>
-        <Controller
-            control={control}
-            name="email"
-            render={({ field: {onChange, onBlur, value} }) => (
-                <TextInput 
-                    placeholder="Data de Nascimento" 
-                    style={[
-                        styles.Input,
-                        {
-                            borderWidth: errors.email && 1,
-                            borderColor: errors.email && '#ff375b'
-                        }
-                    ]} 
-                    onChangeText={onChange} 
-                    onBlur={onBlur} 
-                    value={value} 
+              <Text style={styles.titulo}> Cadastre-se</Text>
+              <Text style={styles.subTitulo}>Crie uma conta para continuar</Text>
+              <View style={styles.form}>
+                <TextInput
+                  style={[styles.input, (errors.email && formSubmitted) && styles.inputError]}
+                  placeholder="Digite seu Email"
+                  underlineColorAndroid={'#7f7f7f'}
+                  placeholderTextColor={'#7f7f7f'}
+                  onChangeText={(text) => setEmail(text)}
+                  value={email}
                 />
-            )}
-        />
-        {errors.email && <Text style={styles.labelError}> {errors.email?.message} </Text>}
-
-
-        <Controller
-            control={control}
-            name="senha"
-            render={({ field: {onChange, onBlur, value} }) => (
-                <TextInput 
-                    placeholder="Senha" 
-                    style={[
-                        styles.Input,
-                        {
-                            borderWidth: errors.senha && 1,
-                            borderColor: errors.senha && '#ff375b'
-                        }
-                    ]} 
-                    onChangeText={onChange} 
-                    onBlur={onBlur} 
-                    value={value} 
+                {(errors.email && formSubmitted) && <Text style={styles.labelError}> {errors.email} </Text>}
+        
+                <TextInput
+                  style={[styles.input, (errors.senha && formSubmitted) && styles.inputError]}
+                  placeholder="Digite sua senha"
+                  value={senha}
+                  underlineColorAndroid={'#7f7f7f'}
+                  placeholderTextColor={'#7f7f7f'}
+                  onChangeText={(text) => setSenha(text)}
+                  />
+                {(errors.senha && formSubmitted) && <Text style={styles.labelError}> {errors.senha} </Text>}
+        
+                <TextInput
+                  style={[styles.input, (errors.apelido && formSubmitted) && styles.inputError]}
+                  placeholder="Digite como quer ser chamado"
+                  placeholderTextColor={'#7f7f7f'}
+                  onChangeText={(text) => setApelido(text)}
+                  value={apelido}
                 />
-            )}
-        />  
-        {errors.senha && <Text style={styles.labelError}> {errors.senha?.message} </Text>}
+                {(errors.apelido && formSubmitted) && <Text style={styles.labelError}> {errors.apelido} </Text>}
 
-        <Controller
-            control={control}
-            name="apelido"
-            render={({ field: {onChange, onBlur, value} }) => (
-                <TextInput 
-                    placeholder="Como quer de ser chamado?" 
-                    style={[
-                        styles.Input,
-                        {
-                            borderWidth: errors.apelido && 1,
-                            borderColor: errors.apelido && '#ff375b'
-                        }
-                    ]} 
-                    onChangeText={onChange} 
-                    onBlur={onBlur} 
-                    value={value} 
-                />
-            )}
-        />
-        {errors.apelido && <Text style={styles.labelError}> {errors.apelido?.message} </Text>}
-
-
-            <TouchableOpacity onPress={handleSubmit(handleSignIn)}>
-                <Text>Cadastrar</Text>
-            </TouchableOpacity>
+                <TouchableOpacity onPress={handleCadastro3}>
+                  <Text> Cadastrar </Text>
+                </TouchableOpacity>
+            </View>
         </View>
+
     );
 };
 
 const styles = StyleSheet.create({
+    container: {
+      flex: 1,
+      backgroundColor: '#2f56b6',
+      justifyContent: 'center',
+    },
+    form: {
+      backgroundColor: '#fff',
+      flex: 1,
+      borderRadius: 10,
+      padding: windowWidth * 0.05, // Use uma porcentagem da largura da tela para o padding
+    },
+    titulo: {
+      fontSize: windowWidth * 0.06, // Use uma porcentagem da largura da tela para o tamanho da fonte
+      color: '#fff',
+      textAlign: 'center',
+    },
+    subTitulo: {
+      fontSize: windowWidth * 0.045, // Use uma porcentagem da largura da tela para o tamanho da fonte
+      color: '#fff',
+      marginTop: windowHeight * 0.01, // Use uma porcentagem da altura da tela para a margem superior
+      textAlign: 'center',
+      marginBottom: windowHeight * 0.03, // Use uma porcentagem da altura da tela para a margem inferior
+    },
+    input: {
+      height: windowHeight * 0.05, // Use uma porcentagem da altura da tela para a altura do input
+      borderColor: 'gray',
+      borderWidth: 1,
+      marginBottom: windowHeight * 0.01, // Use uma porcentagem da altura da tela para a margem inferior
+      paddingHorizontal: windowWidth * 0.03, // Use uma porcentagem da largura da tela para o padding horizontal
+    },
+    inputError: {
+      borderColor: '#ff375b',
+    },
     labelError: {
-        alignSelf: 'flex-start',
-        color: '#2f56b6',
-        marginBottom: 8
-    }
-});
+      color: '#ff375b',
+      marginBottom: windowHeight * 0.02, // Use uma porcentagem da altura da tela para a margem inferior
+    },
+  });
 
-export default CadastroCuidador3; 
-
-
-
+  export default CadastroCuidador3;
