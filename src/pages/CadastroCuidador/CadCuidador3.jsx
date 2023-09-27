@@ -1,15 +1,17 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, TouchableOpacity, StyleSheet, Dimensions } from 'react-native';
+import { View, Text, TextInput, TouchableOpacity, StyleSheet, Dimensions, Image } from 'react-native';
 import * as yup from 'yup';
 import { useNavigation } from '@react-navigation/native';
-
 import { useFormContext } from '../../Contexts/FormContext';
+import * as ImagePicker from 'expo-image-picker'
+import { Button } from 'react-native';
 
 const schema = yup.object().shape({
     email: yup.string().email().required("Digite o seu Email"),
     senha: yup.string().required("Digite o sua Senha"),
     apelido: yup.string().max(50)
 });
+
 
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
@@ -20,6 +22,23 @@ const CadastroCuidador3 = () => {
     const [apelido, setApelido] = useState('');
     const [errors, setErrors] = useState({});
     const [formSubmitted, setFormSubmitted] = useState(false);
+    const [image, setImage] = useState(null);
+
+    const pickImage = async () => {
+      // No permissions request is necessary for launching the image library
+      let result = await ImagePicker.launchImageLibraryAsync({
+        mediaTypes: ImagePicker.MediaTypeOptions.All,
+        allowsEditing: true,
+        aspect: [4, 3],
+        quality: 1,
+      });
+
+      console.log(result);
+
+    if (!result.canceled) {
+      setImage(result.assets[0].uri);
+    }
+  };
     
     const { updateFormData } = useFormContext();
     const navigation = useNavigation();
@@ -45,6 +64,8 @@ const CadastroCuidador3 = () => {
                 setErrors({ [error.path]: error.message});
             });
     }
+
+  
 
     return (
         <View style={styles.container}>
@@ -79,6 +100,9 @@ const CadastroCuidador3 = () => {
                   value={apelido}
                 />
                 {(errors.apelido && formSubmitted) && <Text style={styles.labelError}> {errors.apelido} </Text>}
+
+                <Button title='Escolha sua imagem de perfil' onPress={pickImage}   />
+                {image && <Image source={{ uri: image }} style={{ width: 200, height: 200 }} />}
 
                 <TouchableOpacity onPress={handleCadastro3}>
                   <Text> Cadastrar </Text>
@@ -127,6 +151,8 @@ const styles = StyleSheet.create({
       color: '#ff375b',
       marginBottom: windowHeight * 0.02, // Use uma porcentagem da altura da tela para a margem inferior
     },
+
+
   });
 
   export default CadastroCuidador3;

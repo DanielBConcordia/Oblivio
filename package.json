@@ -24,7 +24,8 @@
     "react-native-screens": "~3.22.0",
     "react-native-textinput-effects": "^0.6.3",
     "react-native-web": "~0.19.6",
-    "yup": "^1.2.0"
+    "yup": "^1.2.0",
+    "expo-image-picker": "~14.3.2"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0"

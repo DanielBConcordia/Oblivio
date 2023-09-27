@@ -101,7 +101,6 @@ const CadastroCuidador = () => {
         <TextInput
           style={[styles.input, (errors.nomeComp && formSubmitted) && styles.inputError && isFocused && styles.inputFocused ]}
           placeholder="Nome Completo"
-          underlineColorAndroid={'#7f7f7f'}
           placeholderTextColor={'#7f7f7f'}
           onChangeText={(text) => setNomeComp(text)}
           value={nomeComp}
@@ -153,7 +152,7 @@ const CadastroCuidador = () => {
 
         <Text style={styles.textLogin}>Já possui uma conta?
           <TouchableOpacity onPress={switchPage} style={styles.loginButton}>
-            Fazer login
+           <Text> Fazer login </Text>
           </TouchableOpacity>
         </Text>
 
@@ -182,7 +181,7 @@ const styles = StyleSheet.create({
     color: '#fff',
     textAlign: 'center',
     marginTop: '8%',
-    fontFamily: 'Arial'
+
   },
 
   subTitulo: {
@@ -190,7 +189,7 @@ const styles = StyleSheet.create({
     color: '#fff', 
     textAlign: 'center',
     marginBottom: windowHeight * 0.07, 
-    fontFamily: 'Arial'
+
   },
 
   input: {
@@ -222,7 +221,7 @@ const styles = StyleSheet.create({
 
   textLogin: {
     fontSize: windowWidth * 0.045,
-    fontFamily: 'Arial'
+
   },
 
   buttonText: {
