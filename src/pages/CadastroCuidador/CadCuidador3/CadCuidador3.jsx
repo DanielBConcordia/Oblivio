@@ -3,7 +3,7 @@ import { Text, StyleSheet, Dimensions } from 'react-native';
 import * as yup from 'yup';
 import { useNavigation } from '@react-navigation/native';
 import { useFormContext } from '../../../Contexts/FormContext';
-import { launchImageLibrary } from 'react-native-image-picker';
+//import { launchImageLibrary } from 'react-native-image-picker';
 
 import {
   UploadButton,
@@ -17,10 +17,8 @@ import {
   Form,
   Title,
   SubTitle,
-  NextButon,
-  TextButton,
-  VoltButton,
-  Buttons
+  NextButton,
+  TextButton 
 } from '../../../../styleGlobal';
 
 const schema = yup.object().shape({
@@ -83,10 +81,6 @@ const CadastroCuidador3 = () => {
       });
   }
 
-  const Voltar = () => {
-    navigation.navigate('CadastroCuidador2')
-  }
-
   // const udpateFile = () => {
   //   const options = {
   //     noData: true,
@@ -131,7 +125,6 @@ const CadastroCuidador3 = () => {
   //     const imagDocs = firestore().collection('posts')
   //   })
   // }
-
 
 
   return (
@@ -184,15 +177,10 @@ const CadastroCuidador3 = () => {
         {/* <Button title='Escolha sua imagem de perfil' onPress={pickImage}   />
                 {image && <Image source={{ uri: image }} style={{ width: 200, height: 200 }} />} */}
 
-        <Buttons>
-          <VoltButton onPress={Voltar}>
-            <TextButton> Voltar </TextButton>
-          </VoltButton>
-
-          <NextButon onPress={handleCadastro3}>
+        
+          <NextButton onPress={handleCadastro3}>
             <TextButton> Cadastrar </TextButton>
-          </NextButon>
-        </Buttons>
+          </NextButton>
       </Form>
 
     </Container>
@@ -201,6 +189,15 @@ const CadastroCuidador3 = () => {
 };
 
 const styles = StyleSheet.create({
+  inputError: {
+    borderColor: '#ff375b',
+  },
+  labelError: {
+    color: '#ff375b',
+    marginBottom: windowHeight * 0.02, // Use uma porcentagem da altura da tela para a margem inferior
+  },
+
+
   // container: {
   //   flex: 1,
   //   backgroundColor: '#2f56b6',
@@ -231,13 +228,6 @@ const styles = StyleSheet.create({
   //   marginBottom: windowHeight * 0.01, // Use uma porcentagem da altura da tela para a margem inferior
   //   paddingHorizontal: windowWidth * 0.03, // Use uma porcentagem da largura da tela para o padding horizontal
   // },
-  inputError: {
-    borderColor: '#ff375b',
-  },
-  labelError: {
-    color: '#ff375b',
-    marginBottom: windowHeight * 0.02, // Use uma porcentagem da altura da tela para a margem inferior
-  },
 
 
 });

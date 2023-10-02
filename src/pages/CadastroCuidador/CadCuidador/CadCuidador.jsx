@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { StyleSheet, Dimensions, Text } from 'react-native';
 import * as yup from 'yup';
 import { useNavigation } from '@react-navigation/native';
-import { useFormContext } from '../../../Contexts/FormContext'; // Substitua 'FormContext' pelo caminho correto do seu contexto
+import { useFormContext } from '../../../Contexts/FormContext';
 
 import { 
   FormInput,
@@ -100,10 +100,6 @@ const CadastroCuidador = () => {
     navigation.navigate('Login');
   }
 
-  const pular = () => {
-    navigation.navigate('CadastroCuidador2');
-  }
-
   const handleFocus = () => {
     setIsFocused(true);
   }
@@ -167,16 +163,12 @@ const CadastroCuidador = () => {
           <TextButton> Próximo </TextButton>
         </NextButton>
 
-        <NextButton onPress={pular}>
-          <TextButton> Pular </TextButton>
-        </NextButton>
-
-        <TextConta> Já possui uma conta?
+        <TextConta> Já possui uma conta? </TextConta>
           <LoginButton onPress={switchPage}>
-           <TextLogin> Fazer login </TextLogin>
+            <TextLogin> Fazer login </TextLogin>
           </LoginButton>
-        </TextConta>
-
+        
+        
       </Form>
     </Container>
   
@@ -184,15 +176,6 @@ const CadastroCuidador = () => {
 };
 
 const styles = StyleSheet.create({
-  // input: {
-  //   height: windowHeight * 0.05,
-  //   borderColor: 'gray',
-  //   borderWidth: 0,
-  //   marginBottom: windowHeight * 0.01, 
-  //   paddingHorizontal: windowWidth * 0.03,
-  //   borderBottomWidth: 1
-  // },
-
   inputError: {
     borderColor: '#ff375b',
   },
@@ -202,21 +185,25 @@ const styles = StyleSheet.create({
     marginBottom: windowHeight * 0.02, 
   },
 
+  // input: {
+  //   height: windowHeight * 0.05,
+  //   borderColor: 'gray',
+  //   borderWidth: 0,
+  //   marginBottom: windowHeight * 0.01, 
+  //   paddingHorizontal: windowWidth * 0.03,
+  //   borderBottomWidth: 1
+  // },
   // loginButton: {
   //   marginLeft: 3,
   //   color: 'blue'
   // },
-
   // textLogin: {
   //   fontSize: windowWidth * 0.045,
-
   // },
-
   // buttonText: {
   //   color: 'blue',          // Texto azul (mesma cor da borda)
   //   textAlign: 'center',
   // },
-  
   // nextButton: {
   //   backgroundColor: 'white', // Fundo branco
   //   borderColor: 'blue',     // Bordas azuis

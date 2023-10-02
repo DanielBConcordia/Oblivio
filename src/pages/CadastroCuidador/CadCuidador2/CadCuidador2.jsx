@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { Text, StyleSheet, Dimensions } from 'react-native';
 import * as yup from 'yup';
 import { useNavigation } from '@react-navigation/native';
-
 import { useFormContext } from '../../../Contexts/FormContext';
 
 import {
@@ -11,9 +10,8 @@ import {
   Form,
   Title,
   SubTitle,
-  NextButon,
-  TextButton,
-  VoltButton
+  NextButton,
+  TextButton
 } from '../../../../styleGlobal'
 
 const schema = yup.object().shape({
@@ -73,11 +71,6 @@ const CadastroCuidador2 = () => {
             setErrors({ [error.path]: error.message});
         });
     }
-
-    const Voltar = () => {
-      navigation.navigate('CadastroCuidador')
-    }
-
         return (
             <Container>
               <Title> Cadastre-se </Title>
@@ -149,13 +142,9 @@ const CadastroCuidador2 = () => {
                 {(errors.pontRef && formSubmitted) && <Text style={styles.labelError}> {errors.pontRef} </Text>}
         
         
-                <VoltButton onPress={Voltar}>
-                  <TextButton> Voltar </TextButton>
-                </VoltButton>
-
-                <NextButon onPress={handleCadastro2}>
+                <NextButton onPress={handleCadastro2}>
                   <TextButton> Próximo </TextButton>
-                </NextButon>
+                </NextButton>
 
               </Form>
             </Container>

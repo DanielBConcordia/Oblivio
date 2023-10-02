@@ -34,14 +34,14 @@ export const Title = styled.Text`
     font-size: 20px;
     color: #FFF;
     text-align: center;
-    margin-top: 10%;
+    margin-top: 20%;
 `;
 
 export const SubTitle = styled.Text`
     font-size: 15px;
     color: #FFF;
     text-align: center;
-    margin-bottom:10%;
+    margin-bottom: 15%;
 `;
 
 export const NextButton = styled.TouchableOpacity`
@@ -61,32 +61,4 @@ export const TextButton = styled.Text`
     text-align: center;
 `;
 
-export const NextButon = styled.TouchableOpacity`
-    width: 50%;
-    height: 8%;
-    background-color: #FFF;
-    border: solid 2px #4C6793;
-    border-radius: 10px;
-    margin-top: 15%;
-    display: flex;
-    justify-content: space-around;
-`;
-export const VoltButton = styled.TouchableOpacity`
-    width: 50%;
-    height: 8%;
-    background-color: #FFF;
-    border: solid 2px #4C6793;
-    border-radius: 10px;
-    margin-top: 15%;
-    display: flex;
-    justify-content: space-around;
-
-`;
-
-export const Buttons = styled.View`
-    width: 100px;
-    display: flex;
-    justify-content: space-around;
-    flex-direction: row;
-`;
 

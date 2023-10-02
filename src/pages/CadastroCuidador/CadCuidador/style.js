@@ -12,5 +12,7 @@ export const LoginButton = styled.TouchableOpacity`
 
 export const TextLogin = styled.Text`
     color: #4C6793;
+    font-size: 16px;
+    text-align: center;
 `;
 
