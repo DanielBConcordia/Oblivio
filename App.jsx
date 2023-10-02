@@ -5,7 +5,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { FormProvider } from './src/Contexts/FormContext';
 
 import CadastroCuidador from './src/pages/CadastroCuidador/CadCuidador/CadCuidador';
-import CadastroCuidador2 from './src/pages/CadastroCuidador/CadCuidador2';
+import CadastroCuidador2 from './src/pages/CadastroCuidador/CadCuidador2/CadCuidador2';
 import CadastroCuidador3 from './src/pages/CadastroCuidador/CadCuidador3/CadCuidador3';
 import TesteCorrect from './src/pages/TesteCorrect/TesteCorrect';
 import Login from './src/pages/Login/Login';

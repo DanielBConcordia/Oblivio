@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { TextInput, TouchableOpacity, StyleSheet, Dimensions, Button, Text } from 'react-native';
+import { StyleSheet, Dimensions, Text } from 'react-native';
 import * as yup from 'yup';
 import { useNavigation } from '@react-navigation/native';
 import { useFormContext } from '../../../Contexts/FormContext'; // Substitua 'FormContext' pelo caminho correto do seu contexto
@@ -13,6 +13,12 @@ import {
   NextButton,
   TextButton
  } from '../../../../styleGlobal';
+
+import {
+  TextConta,
+  LoginButton,
+  TextLogin
+} from './style'
 
 
 const schema = yup.object().shape({
@@ -94,6 +100,10 @@ const CadastroCuidador = () => {
     navigation.navigate('Login');
   }
 
+  const pular = () => {
+    navigation.navigate('CadastroCuidador2');
+  }
+
   const handleFocus = () => {
     setIsFocused(true);
   }
@@ -106,10 +116,10 @@ const CadastroCuidador = () => {
    <Container>
       <Title> Cadastre-se</Title>
       <SubTitle>Crie uma conta para continuar</SubTitle>
-      <Form >
+      <Form> 
         <FormInput
           style={[(errors.nomeComp && formSubmitted) && styles.inputError && isFocused]}
-          placeholder="Nome Completo"
+          placeholder="Digite seu Nome Completo"
           onChangeText={(text) => setNomeComp(text)}
           value={nomeComp}
           onFocus={handleFocus}
@@ -119,7 +129,7 @@ const CadastroCuidador = () => {
 
         <FormInput
           style={[(errors.dataNascimento && formSubmitted) && styles.inputError]}
-          placeholder="dd/mm/yyyy"
+          placeholder="Digite sua Data de Nascimento"
           value={dataNascimento}
           onChangeText={(text) => formatDataNascimento(text)}
           keyboardType="numeric"
@@ -129,7 +139,7 @@ const CadastroCuidador = () => {
 
         <FormInput
           style={[(errors.cpf && formSubmitted) && styles.inputError]}
-          placeholder="CPF"
+          placeholder="DIgite seu CPF"
           onChangeText={(text) => setCpf(text)}
           value={cpf}
         />
@@ -137,19 +147,19 @@ const CadastroCuidador = () => {
 
         <FormInput
           style={[(errors.telefone && formSubmitted) && styles.inputError]}
-          placeholder="Telefone"
-          placeholderTextColor={'#7f7f7f'}
+          placeholder="Digite seu Telefone"
           onChangeText={(text) => setTelefone(text)}
           value={telefone}
+          keyboardType="numeric"
         />
         {(errors.telefone && formSubmitted) && <Text style={styles.labelError}> {errors.telefone} </Text>}
 
         <FormInput
           style={[(errors.telefoneRes && formSubmitted) && styles.inputError]}
-          placeholder="Telefone Reserva"
-          placeholderTextColor={'#7f7f7f'}
+          placeholder="Digite um Telefone Reserva"
           onChangeText={(text) => setTelefoneRes(text)}
           value={telefoneRes}
+          keyboardType="numeric"
         />
         {(errors.telefoneRes && formSubmitted) && <Text style={styles.labelError}> {errors.telefoneRes} </Text>}
 
@@ -157,26 +167,31 @@ const CadastroCuidador = () => {
           <TextButton> Próximo </TextButton>
         </NextButton>
 
-        <Text style={styles.textLogin}>Já possui uma conta?
-          <TouchableOpacity onPress={switchPage} style={styles.loginButton}>
-           <Text> Fazer login </Text>
-          </TouchableOpacity>
-        </Text>
+        <NextButton onPress={pular}>
+          <TextButton> Pular </TextButton>
+        </NextButton>
+
+        <TextConta> Já possui uma conta?
+          <LoginButton onPress={switchPage}>
+           <TextLogin> Fazer login </TextLogin>
+          </LoginButton>
+        </TextConta>
 
       </Form>
     </Container>
+  
   );
 };
 
 const styles = StyleSheet.create({
-  input: {
-    height: windowHeight * 0.05,
-    borderColor: 'gray',
-    borderWidth: 0,
-    marginBottom: windowHeight * 0.01, 
-    paddingHorizontal: windowWidth * 0.03,
-    borderBottomWidth: 1
-  },
+  // input: {
+  //   height: windowHeight * 0.05,
+  //   borderColor: 'gray',
+  //   borderWidth: 0,
+  //   marginBottom: windowHeight * 0.01, 
+  //   paddingHorizontal: windowWidth * 0.03,
+  //   borderBottomWidth: 1
+  // },
 
   inputError: {
     borderColor: '#ff375b',
@@ -187,29 +202,29 @@ const styles = StyleSheet.create({
     marginBottom: windowHeight * 0.02, 
   },
 
-  loginButton: {
-    marginLeft: 5,
-    color: 'blue'
-  },
+  // loginButton: {
+  //   marginLeft: 3,
+  //   color: 'blue'
+  // },
 
-  textLogin: {
-    fontSize: windowWidth * 0.045,
+  // textLogin: {
+  //   fontSize: windowWidth * 0.045,
 
-  },
+  // },
 
-  buttonText: {
-    color: 'blue',          // Texto azul (mesma cor da borda)
-    textAlign: 'center',
-  },
+  // buttonText: {
+  //   color: 'blue',          // Texto azul (mesma cor da borda)
+  //   textAlign: 'center',
+  // },
   
-  nextButton: {
-    backgroundColor: 'white', // Fundo branco
-    borderColor: 'blue',     // Bordas azuis
-    borderRadius: 10,        // Borda arredondada
-    borderWidth: 2,         // Largura da borda
-    padding: 10,
-    marginTop: 35,
-  }
+  // nextButton: {
+  //   backgroundColor: 'white', // Fundo branco
+  //   borderColor: 'blue',     // Bordas azuis
+  //   borderRadius: 10,        // Borda arredondada
+  //   borderWidth: 2,         // Largura da borda
+  //   padding: 10,
+  //   marginTop: 35,
+  // }
 
 });
 
