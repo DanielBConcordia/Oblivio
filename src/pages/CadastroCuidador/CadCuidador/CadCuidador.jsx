@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { StyleSheet, Dimensions, Text } from 'react-native';
+import { StyleSheet, Dimensions, Text, Platform, KeyboardAvoidingView, TouchableWithoutFeedback } from 'react-native';
 import * as yup from 'yup';
 import { useNavigation } from '@react-navigation/native';
 import { useFormContext } from '../../../Contexts/FormContext';
@@ -19,7 +19,6 @@ import {
   LoginButton,
   TextLogin
 } from './style'
-
 
 const schema = yup.object().shape({
   nomeComp: yup.string().required("Digite o Nome Completo"),
@@ -109,6 +108,12 @@ const CadastroCuidador = () => {
   }
 
   return (
+    <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
+    <KeyboardAvoidingView
+    behavior={Platform.OS == "ios" ? "padding" : "height"}
+    style={[styles.container]}
+    keyboardVerticalOffset={50}>
+      <ScroolView style={{width: "90%"}}>
    <Container>
       <Title> Cadastre-se</Title>
       <SubTitle>Crie uma conta para continuar</SubTitle>
@@ -171,7 +176,9 @@ const CadastroCuidador = () => {
         
       </Form>
     </Container>
-  
+    </ScroolView>
+    </KeyboardAvoidingView>
+    </TouchableWithoutFeedback>
   );
 };
 
