@@ -48,7 +48,7 @@ const CadastroCuidador2 = () => {
         setFormSubmitted(true);
 
     schema
-        .validate({ cep, uf, cidade,bairro, rua, numero, complemento, pontRef })
+        .validate({ cep, uf, cidade, bairro, rua, numero, complemento, pontRef })
         .then(() => {
             const userData = {
                 cep,
@@ -70,6 +70,7 @@ const CadastroCuidador2 = () => {
         .catch((error) => {
             setErrors({ [error.path]: error.message});
         });
+
     }
         return (
             <Container>
