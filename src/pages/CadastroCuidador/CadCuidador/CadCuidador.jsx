@@ -42,7 +42,7 @@ const CadastroCuidador = () => {
   const [isFocused, setIsFocused] = useState(false);
 
   // Use o hook useFormContext para acessar o contexto e as funções relacionadas ao formulário
-  const { updateFormData } = useFormContext();
+  const { submitForm } = useFormContext();
 
   const navigation = useNavigation();
 
@@ -71,7 +71,7 @@ const CadastroCuidador = () => {
           setErrors({ dataNascimento: 'Você deve ter menos de 60 anos para se cadastrar' });
         } else {
           // Atualize os dados do formulário usando o contexto
-          updateFormData(userData);
+          submitForm(userData);
 
           // Substitua a rota abaixo pela rota que você criou
           navigation.navigate('CadastroCuidador2'); 
@@ -108,12 +108,12 @@ const CadastroCuidador = () => {
   }
 
   return (
-    <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
-    <KeyboardAvoidingView
-    behavior={Platform.OS == "ios" ? "padding" : "height"}
-    style={[styles.container]}
-    keyboardVerticalOffset={50}>
-      <ScroolView style={{width: "90%"}}>
+    // <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
+    // <KeyboardAvoidingView
+    // behavior={Platform.OS == "ios" ? "padding" : "height"}
+    // style={[styles.container]}
+    // keyboardVerticalOffset={50}>
+    //   <ScroolView style={{width: "90%"}}>
    <Container>
       <Title> Cadastre-se</Title>
       <SubTitle>Crie uma conta para continuar</SubTitle>
@@ -176,9 +176,9 @@ const CadastroCuidador = () => {
         
       </Form>
     </Container>
-    </ScroolView>
-    </KeyboardAvoidingView>
-    </TouchableWithoutFeedback>
+    // </ScroolView>
+    // </KeyboardAvoidingView>
+    // </TouchableWithoutFeedback>
   );
 };
 
