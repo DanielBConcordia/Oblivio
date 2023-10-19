@@ -1,4 +1,3 @@
-import axios from 'axios';
 import { createContext, useContext, useState } from 'react';
 
 const FormContext = createContext();
@@ -8,7 +7,7 @@ export const FormProvider = ({ children }) => {
   const [formData, setFormData] = useState({});
 
   // Função para atualizar os dados do formulário
-  const submitForm = async (data) => {
+  const submitForm = (data) => {
     const updatedData = { ...formData, ...data };
     setFormData(updatedData);
     

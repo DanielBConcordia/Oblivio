@@ -3,14 +3,8 @@ import { Text, StyleSheet, Dimensions } from 'react-native';
 import * as yup from 'yup';
 import { useNavigation } from '@react-navigation/native';
 import { useFormContext } from '../../../Contexts/FormContext';
-import { handleSignIn } from '../../../Functions/functionSigIn';
-//import { launchImageLibrary } from 'react-native-image-picker';
+import axios from 'axios';
 
-import {
-  UploadButton,
-  UploadText,
-  Avatar
-} from './style'
 
 import {
   FormInput,
@@ -38,11 +32,44 @@ const CadastroCuidador3 = () => {
   const [apelido, setApelido] = useState('');
   const [errors, setErrors] = useState({});
   const [formSubmitted, setFormSubmitted] = useState(false);
-  const [url, setUrl] = useState(null)
 
 
   const { submitForm, formData } = useFormContext();
   const navigation = useNavigation();
+
+  async function handleSignIn(formData) {
+    let body = {
+      cpf            : formData.cpf,
+      dtNascimento   : formData.dataNascimento,
+      email          : formData.email,
+      telefone       : formData.telefone,
+      telefoneReserva: formData.telefoneRes,
+      nomeSocial     : formData.apelido,
+      nome           : formData.nomeComp,
+      senha          : formData.senha,
+      rua            : formData.rua,
+      cep            : formData.cep,
+      bairro         : formData.bairro,
+      numeroCasa     : formData.numero,
+      cidade         : formData.cidade,
+      uf             : formData.uf,
+      complementoCasa: formData.complemento,
+      pontoReferencia: formData.pontRef,
+    }
+  let headers = {
+        "Acces-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS"
+      }
+  
+      try {
+        const response = await axios.post('https://oblivio-api.vercel.app/cuidador/cad/', body, headers );
+  
+        console.log(response);
+        alert("Cadastro concluído");
+      } catch (error) {
+        console.error("Erro ao cadastrar", error);
+    }
+    }
 
   const handleCadastro3 = () => {
     setFormSubmitted(true);
@@ -101,8 +128,6 @@ const CadastroCuidador3 = () => {
         />
         {(errors.apelido && formSubmitted) && <Text style={styles.labelError}> {errors.apelido} </Text>}
 
-        {/* <Button title='Escolha sua imagem de perfil' onPress={pickImage}   />
-                {image && <Image source={{ uri: image }} style={{ width: 200, height: 200 }} />} */}
 
         
           <NextButton onPress={handleCadastro3}>

@@ -108,12 +108,6 @@ const CadastroCuidador = () => {
   }
 
   return (
-    // <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
-    // <KeyboardAvoidingView
-    // behavior={Platform.OS == "ios" ? "padding" : "height"}
-    // style={[styles.container]}
-    // keyboardVerticalOffset={50}>
-    //   <ScroolView style={{width: "90%"}}>
    <Container>
       <Title> Cadastre-se</Title>
       <SubTitle>Crie uma conta para continuar</SubTitle>
@@ -176,9 +170,6 @@ const CadastroCuidador = () => {
         
       </Form>
     </Container>
-    // </ScroolView>
-    // </KeyboardAvoidingView>
-    // </TouchableWithoutFeedback>
   );
 };
 
@@ -190,36 +181,7 @@ const styles = StyleSheet.create({
   labelError: {
     color: '#ff375b',
     marginBottom: windowHeight * 0.02, 
-  },
-
-  // input: {
-  //   height: windowHeight * 0.05,
-  //   borderColor: 'gray',
-  //   borderWidth: 0,
-  //   marginBottom: windowHeight * 0.01, 
-  //   paddingHorizontal: windowWidth * 0.03,
-  //   borderBottomWidth: 1
-  // },
-  // loginButton: {
-  //   marginLeft: 3,
-  //   color: 'blue'
-  // },
-  // textLogin: {
-  //   fontSize: windowWidth * 0.045,
-  // },
-  // buttonText: {
-  //   color: 'blue',          // Texto azul (mesma cor da borda)
-  //   textAlign: 'center',
-  // },
-  // nextButton: {
-  //   backgroundColor: 'white', // Fundo branco
-  //   borderColor: 'blue',     // Bordas azuis
-  //   borderRadius: 10,        // Borda arredondada
-  //   borderWidth: 2,         // Largura da borda
-  //   padding: 10,
-  //   marginTop: 35,
-  // }
-
+  }
 });
 
 export default CadastroCuidador;
