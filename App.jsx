@@ -12,6 +12,7 @@ import TesteCorrect from './src/pages/TesteCorrect/TesteCorrect';
 import Login from './src/pages/Login/Login';
 import CadastroPaciente from './src/pages/CadastroPaciente/CadPaciente/CadPaciente';
 import CadastroPaciente2 from './src/pages/CadastroPaciente/CadPaciente2/CadPaciente2';
+import TelaInicial from './src/pages/TelaInicial/TelaInicial';
 
 const Stack = createNativeStackNavigator();
 
@@ -21,11 +22,27 @@ export default function App(){
     <FormProvider2>
      <NavigationContainer>
       <Stack.Navigator>
+
+        {/* Cadastro Cuidador */}
+
         <Stack.Screen name="CadastroCuidador" component={CadastroCuidador} options={{ title: "", headerShown: false }}/>
         <Stack.Screen name="CadastroCuidador2" component={CadastroCuidador2} options={{ title: "", headerShown: false }} />
         <Stack.Screen name="CadastroCuidador3" component={CadastroCuidador3} options={{ title: "", headerShown: false }} />
+
+        {/* Tela Inicial */}
+
+        <Stack.Screen name="TelaInicial" component={TelaInicial} options={{ title: "", headerShown: false}}/>
+
+        {/* Teste Correct */}
+
         <Stack.Screen name="TesteCorrect" component={TesteCorrect} options={{ title: "", headerShown: false }} />
+
+        {/* Login */}
+
         <Stack.Screen name="Login" component={Login} options={{ title: "", headerShown:false }} />
+
+        {/* Cadastro Paciente */}
+
         <Stack.Screen name="CadastroPaciente" component={CadastroPaciente} options={{ title: "", headerShown:false }} />
         <Stack.Screen name="CadastroPaciente2" component={CadastroPaciente2} options={{ title: "", headerShown:false }} />
       </Stack.Navigator>
