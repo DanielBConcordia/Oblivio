@@ -40,7 +40,7 @@ const CadastroCuidador2 = () => {
     const [errors, setErrors] = useState({});
     const [formSubmitted, setFormSubmitted] = useState(false);
 
-    const { updateFormData } = useFormContext();
+    const { submitForm } = useFormContext();
 
     const navigation = useNavigation();
 
@@ -48,7 +48,7 @@ const CadastroCuidador2 = () => {
         setFormSubmitted(true);
 
     schema
-        .validate({ cep, uf, cidade,bairro, rua, numero, complemento, pontRef })
+        .validate({ cep, uf, cidade, bairro, rua, numero, complemento, pontRef })
         .then(() => {
             const userData = {
                 cep,
@@ -61,7 +61,7 @@ const CadastroCuidador2 = () => {
                 pontRef
             };
 
-            updateFormData(userData);
+            submitForm(userData);
 
             navigation.navigate('CadastroCuidador3');
             console.log('Dados Atualizados em JSON:', userData);
@@ -70,6 +70,7 @@ const CadastroCuidador2 = () => {
         .catch((error) => {
             setErrors({ [error.path]: error.message});
         });
+
     }
         return (
             <Container>

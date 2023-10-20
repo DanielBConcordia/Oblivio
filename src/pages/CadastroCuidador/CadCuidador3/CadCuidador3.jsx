@@ -3,13 +3,8 @@ import { Text, StyleSheet, Dimensions } from 'react-native';
 import * as yup from 'yup';
 import { useNavigation } from '@react-navigation/native';
 import { useFormContext } from '../../../Contexts/FormContext';
-//import { launchImageLibrary } from 'react-native-image-picker';
+import axios from 'axios';
 
-import {
-  UploadButton,
-  UploadText,
-  Avatar
-} from './style'
 
 import {
   FormInput,
@@ -37,27 +32,45 @@ const CadastroCuidador3 = () => {
   const [apelido, setApelido] = useState('');
   const [errors, setErrors] = useState({});
   const [formSubmitted, setFormSubmitted] = useState(false);
-  const [url, setUrl] = useState(null)
 
 
-  //   const pickImage = async () => {
-  //     // No permissions request is necessary for launching the image library
-  //     let result = await ImagePicker.launchImageLibraryAsync({
-  //       mediaTypes: ImagePicker.MediaTypeOptions.All,
-  //       allowsEditing: true,
-  //       aspect: [4, 3],
-  //       quality: 1,
-  //     });
-
-  //     console.log(result);
-
-  //   if (!result.canceled) {
-  //     setImage(result.assets[0].uri);
-  //   }
-  // };
-
-  const { updateFormData } = useFormContext();
+  const { submitForm, formData } = useFormContext();
   const navigation = useNavigation();
+
+  async function handleSignIn(formData) {
+    let body = {
+      cpf            : formData.cpf,
+      dtNascimento   : formData.dataNascimento,
+      email          : email,
+      telefone       : formData.telefone,
+      telefoneReserva: formData.telefoneRes,
+      nomeSocial     : apelido,
+      nome           : formData.nomeComp,
+      senha          : senha,
+      rua            : formData.rua,
+      cep            : formData.cep,
+      bairro         : formData.bairro,
+      numeroCasa     : formData.numero,
+      cidade         : formData.cidade,
+      uf             : formData.uf,
+      complementoCasa: formData.complemento,
+      pontoReferencia: formData.pontRef,
+    }
+  let headers = {
+        "Acces-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS"
+      }
+  
+      try {
+        console.log("Teste", body);
+        const response = await axios.post('https://oblivio-api.vercel.app/cuidador/cad/', body, headers );
+  
+        console.log(response);
+        alert("Cadastro concluído");
+      } catch (error) {
+        console.error("Erro ao cadastrar", error);
+    }
+    }
 
   const handleCadastro3 = () => {
     setFormSubmitted(true);
@@ -71,7 +84,8 @@ const CadastroCuidador3 = () => {
           apelido
         };
 
-        updateFormData(userData);
+        submitForm(userData);
+        handleSignIn(formData)
         navigation.navigate('TesteCorrect');
         console.log('Dados Finais em JSON:', userData);
         setErrors({});
@@ -81,50 +95,6 @@ const CadastroCuidador3 = () => {
       });
   }
 
-  // const udpateFile = () => {
-  //   const options = {
-  //     noData: true,
-  //     mediaType: 'photo'
-  //   };
-
-  //   launchImageLibrary(options, response => {
-  //     if(response.didCancel){
-  //       console.log("Cancelar");
-  //     }
-  //     else if(response.error){
-  //       console.log("Ops parece que deu erro");
-  //     }
-  //     else{
-  //       uploadFileBanco(response)
-  //       .then(() => {
-  //         uploadAvatar();
-  //       })
-  //       console.log("URL da foto")
-  //       setUrl(response.assets[0].uri)
-  //     }
-  //   })
-  // }
-
-  // const getFileLocalPath = (response) => {
-  //     return response.assets[0].uri;
-  // }
-
-  // const uploadFileBanco = (response) => {
-  //   const fileSource = getFileLocalPath(response);
-  //   console.log(fileSource);
-
-  //   //const storageRef = storage().ref('users').child(users?.uid);
-  //   //return Storage.putFile(fileSource);
-  // }
-
-  // const uploadAvatar = () => {
-  //   const storageRef = storage().ref('users').child(users?.uid);
-  //   const url = storageRef.getDownloadURL()
-  //   .then((image) => {
-  //     //atualização do do post desse user
-  //     const imagDocs = firestore().collection('posts')
-  //   })
-  // }
 
 
   return (
@@ -132,21 +102,6 @@ const CadastroCuidador3 = () => {
       <Title> Cadastre-se </Title>
       <SubTitle> Crie uma conta para continuar </SubTitle>
       <Form>
-
-        {/* { url ? (
-                  <UploadButton onPress={ () => udpateFile() }>
-                    <UploadText>+</UploadText>
-                    <Avatar
-                      source={{ uri: url}}
-                    />
-                  </UploadButton>
-                ) : (
-                  <UploadButton onPress={ () => udpateFile() }>
-                    <UploadText>+</UploadText>
-                  </UploadButton>
-                )} */}
-
-
 
         <FormInput
           style={[(errors.email && formSubmitted) && styles.inputError]}
@@ -174,8 +129,6 @@ const CadastroCuidador3 = () => {
         />
         {(errors.apelido && formSubmitted) && <Text style={styles.labelError}> {errors.apelido} </Text>}
 
-        {/* <Button title='Escolha sua imagem de perfil' onPress={pickImage}   />
-                {image && <Image source={{ uri: image }} style={{ width: 200, height: 200 }} />} */}
 
         
           <NextButton onPress={handleCadastro3}>
