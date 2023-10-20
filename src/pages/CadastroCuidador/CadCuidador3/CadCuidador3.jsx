@@ -41,12 +41,12 @@ const CadastroCuidador3 = () => {
     let body = {
       cpf            : formData.cpf,
       dtNascimento   : formData.dataNascimento,
-      email          : formData.email,
+      email          : email,
       telefone       : formData.telefone,
       telefoneReserva: formData.telefoneRes,
-      nomeSocial     : formData.apelido,
+      nomeSocial     : apelido,
       nome           : formData.nomeComp,
-      senha          : formData.senha,
+      senha          : senha,
       rua            : formData.rua,
       cep            : formData.cep,
       bairro         : formData.bairro,
@@ -62,6 +62,7 @@ const CadastroCuidador3 = () => {
       }
   
       try {
+        console.log("Teste", body);
         const response = await axios.post('https://oblivio-api.vercel.app/cuidador/cad/', body, headers );
   
         console.log(response);
