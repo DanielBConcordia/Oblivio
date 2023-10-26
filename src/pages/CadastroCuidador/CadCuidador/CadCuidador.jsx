@@ -20,6 +20,7 @@ import {
   TextLogin
 } from './style'
 
+
 const schema = yup.object().shape({
   nomeComp: yup.string().required("Digite o Nome Completo"),
   cpf: yup.string().min(11, "Digite corretamente o CPF").max(11, "Digite corretamente o CPF").required("Digite seu CPF"),

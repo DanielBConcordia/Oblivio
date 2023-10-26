@@ -1,10 +1,21 @@
-import React from 'react-native';
 import { View, TouchableOpacity, Text, TextInput, StyleSheet } from 'react-native';
-import { useState } from "react-native";
+import React, { Alert, useState } from 'react';
 
 import {useForm, Controller} from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
+import { Verificacao } from '../../utils/validacaoEmail/verificacao';
+
+const [email, setEmail] = useState('');
+const [password, setPassword] = useState('');
+
+const entrar = () => {
+    if (email !== '' && password !== '') {
+    //    <Verificacao/>
+    } else {
+        Alert.alert('Erro', 'Por favor, digite email e senha.');
+    }
+};
 
 //Verificação se o campo está preenchido
 const schema = yup.object({

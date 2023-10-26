@@ -16,6 +16,9 @@ import {
   TextButton 
 } from '../../../../styleGlobal';
 
+import {enviarValidacao} from '../../../utils/validacaoEmail/enviarValidacao'
+
+
 const schema = yup.object().shape({
   email: yup.string().email().required("Digite o seu Email"),
   senha: yup.string().required("Digite o sua Senha"),
@@ -64,7 +67,9 @@ const CadastroCuidador3 = () => {
       try {
         console.log("Teste", body);
         const response = await axios.post('https://oblivio-api.vercel.app/cuidador/cad/', body, headers );
-  
+
+        // <enviarValidacao/>
+
         console.log(response);
         alert("Cadastro concluído");
       } catch (error) {
