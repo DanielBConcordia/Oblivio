@@ -1,58 +1,56 @@
-import React, { useState } from "react";
-import { View , ActivityIndicator, Text } from 'react-native';
-import { useFormContext } from "../../Contexts/FormContext";
-import {
-    Container, 
-    Title, 
-    Input, 
-    Button, 
-    TextButton, 
-    ButtonEsSenha,
-    TextEsSenha,
-    ButtonCad,
-    TextCad
-} from './style'
+import React, { useState, useEffect } from "react";
+import { View, Text, TextInput, Button } from "react-native";
+import { useNavigation } from "@react-navigation/native";
+import axios from "axios";
 
-const Login = () =>{
+const Login = () => {
+    const navigation = useNavigation();
+    const [email, setEmail] = useState("");
+    const [senha, setSenha] = useState("");
+    const [dadosUsuario, setUserData] = useState(null); // Inicialize como null
 
-    const { signIn } = useFormContext();
+    useEffect(() => {
+        // O código dentro deste useEffect será executado quando userData for definido.
+        if (dadosUsuario) {
+            console.log(dadosUsuario); // Agora você pode acessar os dados do usuário.
+        }
+    }, [dadosUsuario]); // Monitora as alterações em userData
 
-    async function SubmitSingnIn(){
-        await signIn(email, senha)
+    async function submitSignIn() {
+        let body = {
+            email: email,
+            senha: senha
+        }
+
+        try {
+            const response = await axios.post('https://oblivio-api.vercel.app/cuidador/login', body);
+            const data = response.data;
+
+            setUserData(data);
+
+            navigation.navigate("TelaInicial");
+        } catch (error) {
+            console.error("Erro ao fazer login", error);
+        }
     }
 
-   
-    return(
-        <Container>
-            <Title> Login </Title>
-
-            <Input 
+    return (
+        <View>
+            <Text>Login</Text>
+            <TextInput
                 placeholder="Email"
+                value={email}
+                onChangeText={(text) => setEmail(text)}
             />
-            <Input 
+            <TextInput
                 placeholder="Senha"
+                value={senha}
+                onChangeText={(text) => setSenha(text)}
+                secureTextEntry={true}
             />
-
-            <Button>
-                <TextButton> Entrar </TextButton>
-            </Button>
-
-            <ButtonEsSenha>
-                <TextEsSenha>
-                    Esqueci minha senha
-                </TextEsSenha>
-            </ButtonEsSenha>
-
-            <ButtonCad>
-                <TextCad>
-                    Não possui uma conta?
-                    Cadastre-se
-                </TextCad>
-            </ButtonCad>
-
-        </Container>
-
-    )
-}
+            <Button title="Entrar" onPress={submitSignIn} />
+        </View>
+    );
+};
 
 export default Login;

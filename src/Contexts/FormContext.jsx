@@ -17,25 +17,10 @@ export const FormProvider = ({ children }) => {
 
   };
 
-  async function signIn(email, senha){
-    await auth().signInWithEmailAndPassword(email, senha)
-    .then( async (value) => {
-        let uid = value.user.uid;
-
-        const userProfile = await firestore().collection('users')
-        .doc(uid).get();
-
-        console.log(userProfile.data().nome)
-    })  
-
-    .catch((error) => {
-        console.log(error)
-    })
-}
 
   // Forneça o contexto e o estado para os componentes filhos
   return (
-    <FormContext.Provider value={{ formData, submitForm, signIn }}>
+    <FormContext.Provider value={{ formData, submitForm}}>
       {children}
     </FormContext.Provider>
   );
