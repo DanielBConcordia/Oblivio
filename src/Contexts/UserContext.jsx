@@ -8,11 +8,6 @@ export function UserProvider({ children }) {
   const submitLogin = (data) => {
     const updatedLoginData = { ...userData, ...data };
     setUserData(updatedLoginData);
-    
-    // Adicione um console.log para verificar as mudanças nos dados
-    console.log('Dados do formulário atualizados:', updatedLoginData);
-
-
   };
 
   return (

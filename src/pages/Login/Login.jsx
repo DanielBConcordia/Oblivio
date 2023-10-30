@@ -45,12 +45,6 @@ const Login = () => {
     setShowPassword(!showPassword);
   };
 
-  // useEffect(() => {
-  //   // O código dentro deste useEffect será executado quando userData for definido.
-  //   if (userData) {
-  //     console.log(userData); // Agora você pode acessar os dados do usuário.
-  //   }
-  // }, [userData]); // Monitora as alterações em userData
 
   async function submitSignIn() {
     let body = {

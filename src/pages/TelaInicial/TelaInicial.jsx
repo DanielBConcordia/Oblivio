@@ -31,7 +31,7 @@ export default function TelaInicial() {
             </TouchableOpacity>
 
             <Title>OBLIVIO</Title>
-            <HelloText>Olá {userData.apelido}</HelloText>
+            <HelloText>Olá {userData && userData.cuidador.nomeSocial}</HelloText>
 
             <NothingPac> Nenhum paciente adicionado </NothingPac>
         </Header>
