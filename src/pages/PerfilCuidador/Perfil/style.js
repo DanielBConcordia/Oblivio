@@ -23,7 +23,7 @@ export const TextName = styled.Text`
     font-size: 20px;
     color: #FFFFFF;
     text-align: center;
-    margin-top: 25%;
+    top: 75px;
 `;
 
 export const Button = styled.TouchableOpacity`
@@ -32,7 +32,7 @@ export const Button = styled.TouchableOpacity`
     background-color: #D9D9D9;
     border-radius: 15px;
     margin-top: 10%;
-    margin-inline: 5%;
+    margin-left: 5%;
     padding-left: 15%;
     display: flex;
     justify-content: space-around;
@@ -44,7 +44,8 @@ export const Buttonn = styled.TouchableOpacity`
     background-color: #D9D9D9;
     border-radius: 15px;
     margin-top: 5%;
-    margin-inline: 5%;
+    margin-left: 5%;
+    margin-right: 5%;
     padding-left: 15%;
     display: flex;
     justify-content: space-around;

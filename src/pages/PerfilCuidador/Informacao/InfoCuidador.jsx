@@ -1,5 +1,6 @@
 import React from "react-native";
 import { useNavigation } from "@react-navigation/native";
+import { ScrollView } from "react-native";
 import {
     Container,
     PerfilContainer,
@@ -7,6 +8,7 @@ import {
     TextName,
     Title,
     TextInfo,
+    Scroll,
 } from './style'
 
 
@@ -19,6 +21,7 @@ const InfoCuidador = () => {
     }
 
     return (
+        <Scroll>
         <Container>
             <PerfilContainer>
                 <Imagem></Imagem> 
@@ -68,6 +71,7 @@ const InfoCuidador = () => {
             <TextInfo> 64587798 </TextInfo>
 
         </Container>
+        </Scroll>
     );
 }
 
