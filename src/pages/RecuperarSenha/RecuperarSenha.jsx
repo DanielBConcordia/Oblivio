@@ -1,18 +1,13 @@
 import React, { useState } from 'react';
-import { View, StyleSheet, FormInput, Alert } from 'react-native';
-import auth from '@react-native-firebase/auth';
+import { View, StyleSheet, Alert, Text } from 'react-native';
+import auth from '../../utils/firebaseConfig';
 
-import { 
-    FormInput,
-    Title,
-    SubTitle,
-    NextButton,
-    TextButton
-} from '../../../../styleGlobal';
+import { TextConta } from './style';
+import {FormInput} from '../../../styleGlobal';
 
 const RecuperarSenha = () => {
     const [email, setEmail] = useState('');
-
+ 
     const recover = () => {
     {/* ver se o email está vazio ou não*/}
       if(email !== ''){
@@ -27,16 +22,16 @@ const RecuperarSenha = () => {
                 );
             })
             .catch((e) => {
-                console.log('RecuperarSenha: erro em recover' + e);
+                console.log('RecuperarSenha: recover:' + e);
                 switch (e.code) {
                     case 'auth/user-not-found':
                         Alert.alert('Erro', 'Usuário não cadastrado.');
                         break;
-                    case 'auth/wrong-password':
-                        Alert.alert('Erro', 'Erro na senha.');
-                        break;
                     case 'auth/invalid-email':
                         Alert.alert('Erro', 'Email inválido');
+                        break;
+                    case 'auth/user-disabled':
+                        Alert.alert('Erro', 'Usuário dasabilitado');
                 }
             });
         }
@@ -52,7 +47,7 @@ const RecuperarSenha = () => {
                 keyboardType="email"
                 autoFocus={true}
             />
-        <MeuButton texto="Recuperar" onClick={recover} />
+        <MeuButton onClick={recover}> <Text>Recuperar</Text></MeuButton>
         </View>
     );
 };

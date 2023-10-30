@@ -3,7 +3,7 @@ import { StyleSheet, Dimensions, Text, Platform, KeyboardAvoidingView, Touchable
 import * as yup from 'yup';
 import { useNavigation } from '@react-navigation/native';
 import { useFormContext } from '../../../Contexts/FormContext';
-
+ 
 import { 
   FormInput,
   Container,
@@ -40,6 +40,7 @@ const CadastroCuidador = () => {
   const [errors, setErrors] = useState({});
   const [formSubmitted, setFormSubmitted] = useState(false);
   const [isFocused, setIsFocused] = useState(false);
+
 
   // Use o hook useFormContext para acessar o contexto e as funções relacionadas ao formulário
   const { submitForm } = useFormContext();
@@ -98,6 +99,10 @@ const CadastroCuidador = () => {
   const switchPage = () => {
     navigation.navigate('Login');
   }
+
+  const next = () => {
+    navigation.navigate("RecuperarSenha");
+  } 
 
   const handleFocus = () => {
     setIsFocused(true);
@@ -167,6 +172,7 @@ const CadastroCuidador = () => {
             <TextLogin> Fazer login </TextLogin>
           </LoginButton>
         
+        <NextButton onPress={next}> <Text>Recuperar Senha</Text></NextButton>
         
       </Form>
     </Container>

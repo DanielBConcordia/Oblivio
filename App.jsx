@@ -12,6 +12,7 @@ import TesteCorrect from './src/pages/TesteCorrect/TesteCorrect';
 import Login from './src/pages/Login/Login';
 import CadastroPaciente from './src/pages/CadastroPaciente/CadPaciente/CadPaciente';
 import CadastroPaciente2 from './src/pages/CadastroPaciente/CadPaciente2/CadPaciente2';
+import RecuperarSenha from './src/pages/RecuperarSenha/RecuperarSenha';
 
 const Stack = createNativeStackNavigator();
 
@@ -28,6 +29,7 @@ export default function App(){
         <Stack.Screen name="Login" component={Login} options={{ title: "", headerShown:false }} />
         <Stack.Screen name="CadastroPaciente" component={CadastroPaciente} options={{ title: "", headerShown:false }} />
         <Stack.Screen name="CadastroPaciente2" component={CadastroPaciente2} options={{ title: "", headerShown:false }} />
+        <Stack.Screen name="RecuperarSenha" component={RecuperarSenha} options={{ title: "", headerShown:false }} />
       </Stack.Navigator>
     </NavigationContainer>
     </FormProvider2>
