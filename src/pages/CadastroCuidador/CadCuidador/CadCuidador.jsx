@@ -96,7 +96,7 @@ const CadastroCuidador = () => {
   };
 
   const switchPage = () => {
-    navigation.navigate('Login');
+    navigation.navigate('PerfilPaciente');
   }
 
   const handleFocus = () => {
