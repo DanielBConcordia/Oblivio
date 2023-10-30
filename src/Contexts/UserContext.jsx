@@ -1,21 +1,27 @@
-import React, { createContext, useContext, useState } from "react";
+import { createContext, useContext, useState } from 'react';
 
 const UserContext = createContext();
 
-export const UserProvider = ({ children }) => {
-  const [dadosUsuario, setDadosUsuario] = useState(null);
+export function UserProvider({ children }) {
+  const [userData, setUserData] = useState({});
+
+  const submitLogin = (data) => {
+    const updatedLoginData = { ...userData, ...data };
+    setUserData(updatedLoginData);
+    
+    // Adicione um console.log para verificar as mudanças nos dados
+    console.log('Dados do formulário atualizados:', updatedLoginData);
+
+
+  };
 
   return (
-    <UserContext.Provider value={{ dadosUsuario, setDadosUsuario }}>
+    <UserContext.Provider value={{ userData, submitLogin }}>
       {children}
     </UserContext.Provider>
   );
-};
+}
 
-export const useUserData = () => {
-  const context = useContext(UserContext);
-  if (!context) {
-    throw new Error("useUser deve ser usado dentro de um UserProvider");
-  }
-  return context;
-};
+export function useUser() {
+  return useContext(UserContext);
+}

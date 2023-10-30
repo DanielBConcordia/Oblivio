@@ -2,7 +2,7 @@ import { StatusBar } from 'expo-status-bar';
 import React, { useContext } from 'react';
 import { TouchableOpacity, StyleSheet, Text, View } from 'react-native';
 import MapView from 'react-native-maps';
-import { useUserData } from '../../Contexts/UserContext';
+import { useUser} from '../../Contexts/UserContext';
 import { 
     Container,
     Header,
@@ -14,6 +14,10 @@ import {
  } from './style'
 
 export default function TelaInicial() {
+
+    const { userData } = useUser();
+
+    console.log(userData);
 
 
   return (
@@ -27,6 +31,7 @@ export default function TelaInicial() {
             </TouchableOpacity>
 
             <Title>OBLIVIO</Title>
+            <HelloText>Olá {userData.apelido}</HelloText>
 
             <NothingPac> Nenhum paciente adicionado </NothingPac>
         </Header>
