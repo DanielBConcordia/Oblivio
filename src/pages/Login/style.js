@@ -69,18 +69,16 @@ export const TextEsSenha = styled.Text`
 `;
 
 export const ButtonCad = styled.TouchableOpacity`
-    width: 100%;
     align-items: center;
-    justify-content: center;
-    position: absolute;
-    bottom: 20px;
+    font-size: 16px;
+    text-align: center;
+    margin-top: 8%;
 `;
 
 export const TextCad = styled.Text`
-    color: #ffffff;
     font-size: 16px;
     color: #5C2E7E;
-    margin-bottom: 10px;
+    margin-bottom: 1%;
     font-weight: bold;    
 `;
 
