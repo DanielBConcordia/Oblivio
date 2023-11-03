@@ -16,10 +16,14 @@ export const UploadText = styled.Text`
     opacity: 0.5;
     z-index: 99;
 
-`
+`;
 
 export const Avatar = styled.Image`
     width: 160px;
     height: 160px;
     border-radius: 80px;
-`
+`;
+
+export const View = styled.View`
+    flex-direction: row;
+`;

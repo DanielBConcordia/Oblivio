@@ -4,7 +4,7 @@ import * as yup from 'yup';
 import { useNavigation } from '@react-navigation/native';
 import { useFormContext } from '../../../Contexts/FormContext';
 import axios from 'axios';
-
+import { Ionicons } from '@expo/vector-icons'
 
 import {
   FormInput,
@@ -15,6 +15,9 @@ import {
   NextButton,
   TextButton 
 } from '../../../../styleGlobal';
+
+
+import { View } from './style';
 
 const schema = yup.object().shape({
   email: yup.string().email().required("Digite o seu Email"),
@@ -33,6 +36,8 @@ const CadastroCuidador3 = () => {
   const [errors, setErrors] = useState({});
   const [formSubmitted, setFormSubmitted] = useState(false);
 
+  //declaração do estado showPassword
+  const [showPassword, setShowPassword] = useState(false);
 
   const { submitForm, formData } = useFormContext();
   const navigation = useNavigation();
@@ -113,12 +118,26 @@ const CadastroCuidador3 = () => {
         />
         {(errors.email && formSubmitted) && <Text style={styles.labelError}> {errors.email} </Text>}
 
+      <View>
         <FormInput
           style={[(errors.senha && formSubmitted) && styles.inputError]}
           placeholder="Digite sua senha"
           value={senha}
           onChangeText={(text) => setSenha(text)}
+          secureTextEntry={!showPassword} //Usando a propriedade secureTextEntry para ocultar/mostrar a senha 
         />
+
+        <Ionicons
+          name={showPassword ? 'eye' : 'eye-off'}
+          style={{
+            color: "#000000",
+            fontSize: 22,
+            marginRight: 50,
+            marginTop: 20,
+          }}
+          onPress={() => setShowPassword(!showPassword)}
+          />
+      </View>
         {(errors.senha && formSubmitted) && <Text style={styles.labelError}> {errors.senha} </Text>}
 
         <FormInput
