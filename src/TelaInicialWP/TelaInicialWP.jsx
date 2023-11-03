@@ -14,14 +14,11 @@ import {
     TextPac
 } from './style'
 
-export default function TelaInicial() {
+export default function TelaInicialWP() {
 
     const { userData } = useUser();
     const navigation = useNavigation();
 
-    const cadPaciente = () => {
-        navigation.navigate("CadastroPaciente")
-    }
 
 
 
@@ -37,13 +34,7 @@ export default function TelaInicial() {
 
                 <Title>OBLIVIO</Title>
                 <HelloText>Olá {userData && userData.cuidador.nomeSocial}</HelloText>
-
-                <NothingPac> Nenhum paciente adicionado </NothingPac>
             </Header>
-
-            <AddPac onPress={cadPaciente}>
-                <TextPac> + Cadastrar Paciente </TextPac>
-            </AddPac>
         </Container>
     )
 }
