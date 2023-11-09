@@ -12,7 +12,7 @@ import {
     NextButtonP,
     TextButtonP
 } from '../../../../styleGlobal';
- 
+
 const schema = yup.object().shape({
     nomeCompP: yup.string().required("Digite o Nome Completo"),
     dataNascP: yup.string().required("Digite a Data de Nascimento").matches(/^(0[1-9]|[12][0-9]|3[01])\/(0[1-9]|1[0-2])\/\d{4}$/, "Digite uma data válida (dd/mm/yyyy)"),
@@ -21,7 +21,7 @@ const schema = yup.object().shape({
     dificuldade: yup.string().required("Digite a dificuldade da pessoa"),
     responsavel: yup.string().required("Digite o nome do responsável pela pessoa"),
 });
- 
+
 const windowHeight = Dimensions.get('window').height;
 const windowWidth = Dimensions.get('window').width;
 
@@ -42,50 +42,50 @@ const CadastroPaciente = () => {
     const navigation = useNavigation();
 
     const handleCadastroP = () => {
-      setFormSubmitted(true);
+        setFormSubmitted(true);
 
-    schema
-      .validate({ nomeCompP, dataNascP, cpfP, tipoSang, dificuldade, responsavel })
-      .then(() => {
-        const formattedDataNascimento = dataNascP.replace(/\//g, '');
-        const userData = {
-            nomeCompP,
-            dataNascP: formattedDataNascimento,
-            cpfP,
-            tipoSang,
-            dificuldade,
-            responsavel,
-        };
+        schema
+            .validate({ nomeCompP, dataNascP, cpfP, tipoSang, dificuldade, responsavel })
+            .then(() => {
+                const formattedDataNascimento = dataNascP.replace(/\//g, '');
+                const userData = {
+                    nomeCompP,
+                    dataNascP: formattedDataNascimento,
+                    cpfP,
+                    tipoSang,
+                    dificuldade,
+                    responsavel,
+                };
 
-            updateFormData(userData);
+                updateFormData(userData);
 
-            navigation.navigate('CadastroPaciente2');
-            console.log('Dados Atualizados em JSON:', userData);
-            setErrors({});
-      })
-      .catch((error) => {
-        setErrors({ [error.path]: error.message });
-      });
+                navigation.navigate('CadastroPaciente2');
+                console.log('Dados Atualizados em JSON:', userData);
+                setErrors({});
+            })
+            .catch((error) => {
+                setErrors({ [error.path]: error.message });
+            });
     }
 
     const formatDataNascimento = (text) => {
         let formattedDate = text.replace(/\D/g, '');
         if (formattedDate.length > 2) {
-          formattedDate = `${formattedDate.slice(0, 2)}/${formattedDate.slice(2)}`;
+            formattedDate = `${formattedDate.slice(0, 2)}/${formattedDate.slice(2)}`;
         }
         if (formattedDate.length > 5) {
-          formattedDate = `${formattedDate.slice(0, 5)}/${formattedDate.slice(5, 9)}`;
+            formattedDate = `${formattedDate.slice(0, 5)}/${formattedDate.slice(5, 9)}`;
         }
         setDataNascP(formattedDate);
-      };
+    };
 
-      const handleFocus = () => {
+    const handleFocus = () => {
         setIsFocused(true);
-      }
+    }
 
-      const handleBlur = () => {
+    const handleBlur = () => {
         setIsFocused(false);
-      }
+    }
 
     return (
         <ContainerP>

@@ -3,6 +3,8 @@ import { StyleSheet, Dimensions, Text } from 'react-native';
 import * as yup from 'yup';
 import { useNavigation } from '@react-navigation/native';
 import { useFormContext } from '../../../Contexts/FormContext2';
+import { useUser } from '../../../Contexts/UserContext';
+import axios from 'axios';
 
 import {
     FormInput,
@@ -12,7 +14,7 @@ import {
     NextButtonP,
     TextButtonP
 } from '../../../../styleGlobal';
- 
+
 const schema = yup.object().shape({
     // medicamento: yup.string().required("Digite o Nome Completo"),
     // quantidade: yup.string().required("Digite a Data de Nascimento").matches(/^(0[1-9]|[12][0-9]|3[01])\/(0[1-9]|1[0-2])\/\d{4}$/, "Digite uma data válida (dd/mm/yyyy)"),
@@ -21,7 +23,7 @@ const schema = yup.object().shape({
     // temperamento: yup.string().required("Digite a dificuldade da pessoa"),
     // comoLidar: yup.string().required("Digite o nome do responsável pela pessoa"),
 });
- 
+
 const windowHeight = Dimensions.get('window').height;
 const windowWidth = Dimensions.get('window').width;
 
@@ -37,43 +39,72 @@ const CadastroPaciente2 = () => {
     const [formSubmitted, setFormSubmitted] = useState(false);
     const [isFocused, setIsFocused] = useState(false);
 
-    const { updateFormData } = useFormContext();
+    const { formData } = useFormContext();
+    const { userData } = useUser();
 
     const navigation = useNavigation();
 
-    const handleCadastroP2 = () => {
-      setFormSubmitted(true);
+    async function handleSubmit(formData) {
+        let body = {
+            cpf: formData.cpfP,
+            dtNascimento: formData.dataNascP,
+            nome: formData.nomeCompP,
+            condicao: formData.dificuldade,
+            fotoPerfil: "",
+            responsavelLegal: formData.responsavel,
+            tipoSanguineo: formData.tipoSang,
+            temperamento: temperamento,
+            interacao: comoLidar,
+            tb_paciente_fk_cuidador: userData.cuidador.id
+        }
+        let headers = {
+            "Acces-Control-Allow-Origin": "*",
+            "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS"
+        }
 
-    schema
-      .validate({ medicamento, quantidade, horarios, alergia, temperamento, comoLidar })
-      .then(() => {
-        const userData = {
-            medicamento, 
-            quantidade, 
-            horarios, 
-            alergia, 
-            temperamento, 
-            comoLidar
-        };
+        try {
+            console.log("Teste", body)
+            const response = await axios.post('https://oblivio-api.vercel.app/paciente/cad/', body, headers);
 
-             updateFormData(userData);
-
-            navigation.navigate('TesteCorrect');
-            console.log('Dados Atualizados em JSON:', userData);
-            setErrors({});
-      })
-      .catch((error) => {
-        setErrors({ [error.path]: error.message });
-      });
+            console.log(response);
+        } catch (error) {
+            console.log("Erro ao cadastrar", error)
+        }
     }
 
-      const handleFocus = () => {
-        setIsFocused(true);
-      }
 
-      const handleBlur = () => {
+    const handleCadastroP2 = () => {
+        setFormSubmitted(true);
+
+        schema
+            .validate({ medicamento, quantidade, horarios, alergia, temperamento, comoLidar })
+            .then(() => {
+                const userData = {
+                    medicamento,
+                    quantidade,
+                    horarios,
+                    alergia,
+                    temperamento,
+                    comoLidar
+                };
+
+                handleSubmit(formData);
+                navigation.navigate("TelaInicialWP")
+
+                setErrors({});
+            })
+            .catch((error) => {
+                setErrors({ [error.path]: error.message });
+            });
+    }
+
+    const handleFocus = () => {
+        setIsFocused(true);
+    }
+
+    const handleBlur = () => {
         setIsFocused(false);
-      }
+    }
 
     return (
         <ContainerP>

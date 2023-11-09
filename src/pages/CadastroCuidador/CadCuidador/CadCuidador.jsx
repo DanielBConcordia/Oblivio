@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { StyleSheet, Dimensions, Text, Platform, KeyboardAvoidingView, TouchableWithoutFeedback } from 'react-native';
+import { StyleSheet, Dimensions, Text, Platform, ScrollView, KeyboardAvoidingView, TouchableWithoutFeedback } from 'react-native';
 import * as yup from 'yup';
 import { useNavigation } from '@react-navigation/native';
 import { useFormContext } from '../../../Contexts/FormContext';
@@ -108,6 +108,7 @@ const CadastroCuidador = () => {
   }
 
   return (
+    <ScrollView>
    <Container>
       <Title> Cadastre-se</Title>
       <SubTitle>Crie uma conta para continuar</SubTitle>
@@ -170,7 +171,8 @@ const CadastroCuidador = () => {
         
       </Form>
     </Container>
-  );
+    </ScrollView>
+  );s
 };
 
 const styles = StyleSheet.create({

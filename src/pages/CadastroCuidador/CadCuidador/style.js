@@ -15,4 +15,3 @@ export const TextLogin = styled.Text`
     font-size: 16px;
     text-align: center;
 `;
-

@@ -71,7 +71,6 @@ const CadastroCuidador3 = () => {
         const response = await axios.post('https://oblivio-api.vercel.app/cuidador/cad/', body, headers );
   
         console.log(response);
-        alert("Cadastro concluído");
       } catch (error) {
         console.error("Erro ao cadastrar", error);
     }

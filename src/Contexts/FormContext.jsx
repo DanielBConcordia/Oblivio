@@ -12,14 +12,15 @@ export const FormProvider = ({ children }) => {
     setFormData(updatedData);
     
     // Adicione um console.log para verificar as mudanças nos dados
-    console.log('Dados do formulário atualizados:', updatedData);
+    // console.log('Dados do formulário atualizados:', updatedData);
 
 
   };
 
+
   // Forneça o contexto e o estado para os componentes filhos
   return (
-    <FormContext.Provider value={{ formData, submitForm }}>
+    <FormContext.Provider value={{ formData, submitForm}}>
       {children}
     </FormContext.Provider>
   );
@@ -27,4 +28,4 @@ export const FormProvider = ({ children }) => {
 
 export const useFormContext = () => {
   return useContext(FormContext);
-};
+}

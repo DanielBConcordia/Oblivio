@@ -1,88 +1,153 @@
-import React from 'react-native';
-import { View, TouchableOpacity, Text, TextInput, StyleSheet } from 'react-native';
-import { useState } from "react-native";
-
-import {useForm, Controller} from 'react-hook-form';
-import { yupResolver } from '@hookform/resolvers/yup';
-import * as yup from 'yup';
-
-//Verificação se o campo está preenchido
-const schema = yup.object({
-    email: yup.string().email("Email Inválido").required("Digite seu email"),
-    senha: yup.string().min(6, "A senha deve ter pelo menos 6 digitos").required("Digite sua senha")
-});
-
+import React, { useState, useEffect } from "react";
+import {
+  View,
+  Text,
+  StyleSheet,
+  TouchableWithoutFeedback,
+  Keyboard,
+  Touchable,
+} from "react-native";
+import { Ionicons } from "@expo/vector-icons";
+import { useNavigation } from "@react-navigation/native";
+import axios from "axios";
+import { useUser } from "../../Contexts/UserContext";
+import {
+  Container,
+  Title,
+  Campo,
+  Button,
+  TextButton,
+  ButtonEsSenha,
+  TextEsSenha,
+  ButtonCad,
+  TextCad,
+  InputContainer,
+} from "./style";
 
 const Login = () => {
+  const navigation = useNavigation();
+  const [email, setEmail] = useState("");
+  const [senha, setSenha] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
+  // const [userData, setUserData] = useState(null); // Inicialize como null
 
-    const { control, handleSubmit, formState: { errors } } = useForm({
-        resolver : yupResolver(schema)
-    })
+  const { submitLogin } = useUser();
 
-    function handleSignIn(data) {
-       console.log(data);
+  const switchPage = () => {
+    navigation.navigate("CadastroCuidador");
+  };
+
+  const dismissKeyboard = () => {
+    Keyboard.dismiss();
+  };
+
+  const toggleShowPassword = () => {
+    setShowPassword(!showPassword);
+  };
+
+
+  async function submitSignIn() {
+    let body = {
+      email: email,
+      senha: senha,
+    };
+
+    try {
+      const response = await axios.post(
+        "https://oblivio-api.vercel.app/cuidador/login",
+        body
+      );
+      const userData = response.data;
+      submitLogin(userData);
+      navigation.navigate("TelaInicial");
+    } catch (error) {
+      console.error("Erro ao fazer login", error);
     }
+  }
 
-    return(
-        <View style={styles.container}>
-        <Controller
-            control={control}
-            name="email"
-            render={({ field: {onChange, onBlur, value} }) => (
-                <TextInput 
-                    placeholder="Data de Nascimento" 
-                    style={[
-                        styles.Input,
-                        {
-                            borderWidth: errors.email && 1,
-                            borderColor: errors.email && '#ff375b'
-                        }
-                    ]} 
-                    onChangeText={onChange} 
-                    onBlur={onBlur} 
-                    value={value} 
-                />
-            )}
-        />
-        {errors.email && <Text style={styles.labelError}> {errors.email?.message} </Text>}
+  return (
+    <TouchableWithoutFeedback onPress={dismissKeyboard}>
+      <Container>
+        <Title> Login </Title>
 
+        <InputContainer>
+          <View
+            style={{
+              paddingHorizontal: 17,
+              flexDirection: "row",
+            }}
+          >
+            <Ionicons
+              name="mail-outline"
+              style={{
+                color: "#000000",
+                fontSize: 22,
+                marginTop: 20,
+              }}
+            />
 
-        <Controller
-            control={control}
-            name="senha"
-            render={({ field: {onChange, onBlur, value} }) => (
-                <TextInput 
-                    placeholder="CPF" 
-                    style={[
-                        styles.Input,
-                        {
-                            borderWidth: errors.senha && 1,
-                            borderColor: errors.senha && '#ff375b'
-                        }
-                    ]} 
-                    onChangeText={onChange} 
-                    onBlur={onBlur} 
-                    value={value} 
-                />
-            )}
-        />  
-        {errors.senha && <Text style={styles.labelError}> {errors.senha?.message} </Text>}
+            <Campo
+              placeholder="Email"
+              value={email}
+              keyboardType="email-address"
+              onChangeText={(text) => setEmail(text)}
+              onSubmitEditing={() => senhaInputRef.current.focus()}
+            />
+          </View>
 
+          <View
+            style={{
+              paddingHorizontal: 17,
+              flexDirection: "row",
+            }}
+          >
+            <Ionicons
+              name="lock-closed-outline"
+              style={{
+                color: "#000000",
+                fontSize: 22,
+                marginLeft: 70,
+                marginTop: 20,
+              }}
+            />
+            <Campo
+              placeholder="Senha"
+              value={senha}
+              secureTextEntry={!showPassword} // Altera o modo de exibição da senha com base no estado showPassword
+              onChangeText={(text) => setSenha(text)}
+              onSubmitEditing={submitSignIn}
+              style={{}}
+            />
 
-            <TouchableOpacity onPress={handleSubmit(handleSignIn)}>
-                <Text>Cadastrar</Text>
-            </TouchableOpacity>
-        </View>
-    );
+            <TouchableWithoutFeedback onPress={toggleShowPassword}>
+              <Ionicons
+                name={showPassword ? "eye" : "eye-off"}
+                style={{
+                  color: "#000000",
+                  fontSize: 22,
+                  marginRight: 50,
+                  marginTop: 20,
+                }}
+              />
+            </TouchableWithoutFeedback>
+          </View>
+        </InputContainer>
+
+        <ButtonEsSenha>
+          <TextEsSenha>Esqueci minha senha</TextEsSenha>
+        </ButtonEsSenha>
+
+        <Button onPress={submitSignIn}>
+          <TextButton> Entrar </TextButton>
+        </Button>
+
+        <ButtonCad onPress={switchPage}>
+          <TextCad>Não possui uma conta?</TextCad>
+          <TextCad>Cadastre-se</TextCad>
+        </ButtonCad>
+      </Container>
+    </TouchableWithoutFeedback>
+  );
 };
 
-const styles = StyleSheet.create({
-    labelError: {
-        alignSelf: 'flex-start',
-        color: '#2f56b6',
-        marginBottom: 8
-    }
-});
-
-export default Login; 
-
+export default Login;
