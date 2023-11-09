@@ -24,7 +24,7 @@ import CadastroPaciente2 from './src/pages/CadastroPaciente/CadPaciente2/CadPaci
 import TelaInicial from './src/pages/TelaInicial/TelaInicial';
 
 {/* Tela inicial com paciente */ }
-import TelaInicialWP from './src/TelaInicialWP/TelaInicialWP';
+import TelaInicialWP from './src/pages/TelaInicialWP/TelaInicialWP';
 
 const Stack = createNativeStackNavigator();
 
