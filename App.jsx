@@ -26,6 +26,9 @@ import TelaInicial from './src/pages/TelaInicial/TelaInicial';
 {/* Tela inicial com paciente */ }
 import TelaInicialWP from './src/TelaInicialWP/TelaInicialWP';
 
+{/* Tela de Menu */ }
+import Menu from './src/pages/Menu/Menu';
+
 const Stack = createNativeStackNavigator();
 
 export default function App() {
@@ -58,6 +61,10 @@ export default function App() {
               {/* Tela incial com paciente */}
 
               <Stack.Screen name="TelaInicialWP" component={TelaInicialWP} options={{ title: "", headerShown: false }} />
+
+              {/* Tela de Menu */}
+
+              <Stack.Screen name="Menu" component={Menu} options={{ title: "", headerShown: false }} />
             </Stack.Navigator>
           </NavigationContainer>
         </UserProvider>
