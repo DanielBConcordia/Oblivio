@@ -2,15 +2,16 @@ import React, { useState } from 'react';
 import { View, StyleSheet, Alert, Text } from 'react-native';
 import auth from '../../utils/firebaseConfig';
 
-import { TextConta } from './style';
+import { TextConta, MeuButton } from './style';
 import {FormInput} from '../../../styleGlobal';
 
 const RecuperarSenha = () => {
     const [email, setEmail] = useState('');
+    const [errors, setErrors] = useState({});
  
     const recover = () => {
-    {/* ver se o email está vazio ou não*/}
-      if(email !== ''){
+    {/* ver se o email está vazio ou não*/} 
+      if(email !== ''){ errors
         console.log(email);
         auth()
             .sendPasswordResetEmail(email)
