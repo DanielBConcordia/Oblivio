@@ -1,8 +1,9 @@
 import { StatusBar } from 'expo-status-bar';
 import React, { useContext } from 'react';
+import { useState } from 'react';
 import { TouchableOpacity, StyleSheet, Text, View, Image, Modal } from 'react-native';
 import MapView from 'react-native-maps';
-import { useUser } from '../../Contexts/UserContext';
+import { useUser } from '../Contexts/UserContext';
 import { useNavigation } from '@react-navigation/native';
 import {
     Container,
@@ -11,6 +12,7 @@ import {
     HelloText,
 } from './style';
 import menu from '../../assets/menu.png';
+import Menu from '../pages/Menu/Menu';
 
 export default function TelaInicialWP() {
 
@@ -22,6 +24,7 @@ export default function TelaInicialWP() {
         navigation.navigate('Menu');
         setVisibleModal(true);
     }
+
     return (
         <Container>
             <StatusBar></StatusBar>
@@ -34,7 +37,7 @@ export default function TelaInicialWP() {
                         tintColor: 'white',
                         width: 20,
                         height: 25,
-                        marginTop: '15%',
+                        marginTop: '10%',
                         left: '6%',
                         // top: 53.85,
                         // left: 41.36,
@@ -47,7 +50,7 @@ export default function TelaInicialWP() {
                     transparent={true}
                     onRequestClose={() => setVisibleModal(false)}
                 >
-                <ActionModal/>
+                <Menu/>
                 </Modal>
 
                 <Title> OBLIVIO </Title>

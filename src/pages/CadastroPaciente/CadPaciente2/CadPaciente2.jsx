@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React from 'react';
+import { useState } from 'react';
 import { StyleSheet, Dimensions, Text } from 'react-native';
 import * as yup from 'yup';
 import { useNavigation } from '@react-navigation/native';

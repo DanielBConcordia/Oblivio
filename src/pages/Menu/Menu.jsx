@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React from 'react';
+import { useState } from 'react';
 import {
   SafeAreaView,
   View,
@@ -16,22 +17,23 @@ import pessaos from "../../../assets/pessoas.png";
 import sair from "../../../assets/sair.png";
 
 // Pagina inicial
-//import Login from "./Menu";
+import TelaInicialWP from "../../TelaInicialWP/TelaInicialWP";
 
 const Menu = () => {
     const [visibleModal, setVisibleModal] = useState(false);
     const navigation = useNavigation();
 
     const Voltar = () => {
-        navigation.navigate('TelaInicialWP');
+      navigation.navigate('TelaInicialWP');
+      setVisibleModal(true)
     }
 
     const Perfil = () => {
-        navigation.navigate('');
+      navigation.navigate('PerfilCuidador');
     }
 
     const Pessoas = () => {
-        navigation.navigate('Login');
+      navigation.navigate('');
     }
 
     return (
@@ -39,9 +41,7 @@ const Menu = () => {
 
           <View style={styles.cabecalhoMenu}>
             
-            <TouchableOpacity 
-             onPress={() => setVisibleModal(true)}
-            >
+            <TouchableOpacity onPress={Voltar}>
               <Image
                 source={iconVoltar}
                 style={{
@@ -64,10 +64,10 @@ const Menu = () => {
             transparent={true}
             onRequestClose={() => setVisibleModal(false)}
           >
-            {/* <App /> */}
+             <TelaInicialWP /> 
           </Modal> 
     
-          <View style={styles.opcoes}>
+          <View style={styles.opcoes} onPress={Perfil}>
             <Image
               source={perfil}
               style={{
@@ -85,7 +85,7 @@ const Menu = () => {
             <Text style={styles.txtItem}> Perfil </Text>
           </View>
     
-          <View style={styles.opcoes}>
+          <View style={styles.opcoes} onPress={Pessoas}>
             <Image
               source={pessaos}
               style={{
