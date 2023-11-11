@@ -1,7 +1,7 @@
 import styled from 'styled-components/native';
 
 export const Scroll = styled.ScrollView`
-    height: 100%, 
+    height: 100%;
     background-color: #ffffff;
 `;
 
@@ -12,7 +12,7 @@ export const Container = styled.View`
 `;
 
 export const PerfilContainer = styled.View`
-    widht: 100%
+    width: 100%;
     height: 30%;
     background-color: #5C2E7E;
     border-bottom-left-radius: 30px;
@@ -20,11 +20,11 @@ export const PerfilContainer = styled.View`
 `;
 
 export const Imagem = styled.View`
-    backgroud-color: #000000;
-    widht: 50%;
+    background-color: #000000;
+    width: 50%;
     height: 40%;
-    // justify-content: center;
-    // border-radius: 20px;
+    /* justify-content: center; */
+    /* border-radius: 20px; */
 `;
 
 export const TextName = styled.Text`
@@ -39,12 +39,21 @@ export const Title = styled.Text`
     color: #a2a2a2;
     margin-top: 5%;
     margin-left: 5%;
-    margin-right: 5%
+    margin-right: 5%;
 `;
+
 export const TextInfo = styled.Text`
     font-size: 18px;
     color: #000000;
     margin-left: 5%;
-    margin-right: 5%
-    
+    margin-right: 5%;
+`;
+
+export const StyledView = styled.View`
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin-right: 22px;
+    margin-left: 22px;
+    margin-top: 43px;    
 `;

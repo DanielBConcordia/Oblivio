@@ -1,4 +1,4 @@
-import React from "react-native";
+import React from "react";
 import { useNavigation } from "@react-navigation/native";
 import {
     Container,
@@ -8,8 +8,10 @@ import {
     TextName,
     Title,
     TextInfo,
+    StyledView
 } from './style'
 import { Text } from "react-native";
+import { Ionicons } from "@expo/vector-icons";
 
 const InfoPaciente = () => {
 
@@ -21,8 +23,25 @@ const InfoPaciente = () => {
 
     return (
        <Scroll>
-       <Container>
-            <PerfilContainer>
+            <Container>
+                <PerfilContainer>
+                <StyledView>
+                        <Ionicons
+                            name="ios-arrow-back" 
+                            style={{
+                                color: '#FFFFFF',
+                                fontSize: 35,
+                            }}
+                            />
+
+                        <Ionicons
+                            name="ios-create" 
+                            style={{
+                                color: '#FFFFFF',
+                                fontSize: 35,
+                            }}
+                            />  
+                    </StyledView>
                <Imagem></Imagem> 
                <TextName onPress={Voltar}> Nome da Pessoa </TextName>
            </PerfilContainer>

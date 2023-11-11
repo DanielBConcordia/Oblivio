@@ -6,7 +6,7 @@ export const Container = styled.View`
 `;
 
 export const PerfilContainer = styled.View`
-    widht: 100%
+    width: 100%; // Corrigido de 'widht' para 'width'
     height: 33%;
     background-color: #5C2E7E;
     border-bottom-left-radius: 30px;
@@ -14,17 +14,25 @@ export const PerfilContainer = styled.View`
 `;
 
 //  export const ContainerImage = styled.View`
-//      widht: 50px;
+//      width: 50px; // Corrigido de 'widht' para 'width'
 //      height: 50px;
-//      backgroud-color: #000000;
-//      position: center;
+//      background-color: #000000;
+//      position: center; // Corrigido de 'center' para 'center'
 //  `;
 
-
 export const Imagem = styled.View`
-    backgroud-color: #c1c1c1;
-    widht: 100%;
+    background-color: #c1c1c1;
+    width: 100%; // Corrigido de 'widht' para 'width'
     height: 40%;
+`;
+
+export const StyledView = styled.View`
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin-right: 22px;
+    margin-left: 22px;
+    margin-top: 43px;  
 `;
 
 export const TextName = styled.Text`
@@ -64,4 +72,3 @@ export const TextButton = styled.Text`
     font-size: 18px;
     text-align: left;
 `;
-
