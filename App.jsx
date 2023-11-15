@@ -18,6 +18,7 @@ import InfoCuidador from './src/pages/PerfilCuidador/Informacao/InfoCuidador';
 
 import PerfilPaciente from './src/pages/PerfilPaciente/Perfil/PerfilP';
 import InfoPaciente from './src/pages/PerfilPaciente/Informacao/InfoPaciente';
+import UpdateInfoPaciente from './src/pages/PerfilPaciente/Informacao/UpdateInfoPaciente';
 
 const Stack = createNativeStackNavigator();
 
@@ -39,6 +40,7 @@ export default function App(){
 
         <Stack.Screen name="PerfilPaciente" component={PerfilPaciente} options={{ title: "", headerShown:false }} />
         <Stack.Screen name="InfoPaciente" component={InfoPaciente} options={{ title: "", headerShown:false }} />
+        <Stack.Screen name="UpdateInfoPaciente" component={UpdateInfoPaciente} options={{ title: "", headerShown:false }} />
 
       </Stack.Navigator>
     </NavigationContainer>

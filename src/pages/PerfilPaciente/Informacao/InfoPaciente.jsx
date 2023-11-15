@@ -10,7 +10,6 @@ import {
     TextInfo,
     StyledView
 } from './style'
-import { Text } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 
 const InfoPaciente = () => {
@@ -19,6 +18,10 @@ const InfoPaciente = () => {
 
     const Voltar = () => {
         navigation.navigate('PerfilCuidador');
+    }
+
+    const Update = () => {
+        navigation.navigate('UpdateInfoPaciente');
     }
 
     return (
@@ -32,6 +35,7 @@ const InfoPaciente = () => {
                                 color: '#FFFFFF',
                                 fontSize: 35,
                             }}
+                            onPress={Voltar}
                             />
 
                         <Ionicons
@@ -40,10 +44,11 @@ const InfoPaciente = () => {
                                 color: '#FFFFFF',
                                 fontSize: 35,
                             }}
+                            onPress={Update}
                             />  
                     </StyledView>
                <Imagem></Imagem> 
-               <TextName onPress={Voltar}> Nome da Pessoa </TextName>
+               <TextName> Nome da Pessoa </TextName>
            </PerfilContainer>
     
             <Title> Data de Nascimento </Title>

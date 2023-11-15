@@ -57,3 +57,18 @@ export const StyledView = styled.View`
     margin-left: 22px;
     margin-top: 43px;    
 `;
+
+export const FormInput = styled.TextInput`
+    height: 30px;
+    border-color: #7f7f7f;
+    border-width: 0;
+    margin-bottom: 1px;
+    margin-top: 5%;
+    border-bottom-width: 1px;
+    :active {
+        border: none;
+    };
+    padding-bottom: 2px;
+    padding-left: 10px;
+    placeholder-text-color: #7f7f7f      
+`;

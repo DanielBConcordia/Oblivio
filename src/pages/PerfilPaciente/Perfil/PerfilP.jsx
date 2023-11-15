@@ -63,7 +63,7 @@ const PerfilPaciente = () => {
                         fontSize: 25,
                         position: 'absolute',
                         alignItems: 'center',
-                        marginLeft: 22
+                        marginLeft: 20
                      }}
                 />
                 <TextButton> Informações do Paciente </TextButton>
@@ -77,7 +77,7 @@ const PerfilPaciente = () => {
                         fontSize: 25,
                         position: 'absolute',
                         alignItems: 'center',
-                        marginLeft: 22
+                        marginLeft: 20
                     }}
                 />
                 <TextButton> Histórico </TextButton>
@@ -91,7 +91,7 @@ const PerfilPaciente = () => {
                         fontSize: 25,
                         position: 'absolute',
                         alignItems: 'center',
-                        marginLeft: 22
+                        marginLeft: 20
                     }}
                 />
                 <TextButton> Cuidadores </TextButton>
@@ -105,7 +105,7 @@ const PerfilPaciente = () => {
                         fontSize: 25,
                         position: 'absolute',
                         alignItems: 'center',
-                        marginLeft: 22
+                        marginLeft: 20
                     }}
                 />
                 <TextButton> Adicionar Cuidador </TextButton>
@@ -119,7 +119,7 @@ const PerfilPaciente = () => {
                     fontSize: 25,
                     position: 'absolute',
                     alignItems: 'center',
-                    marginLeft: 22
+                    marginLeft: 20
                 }}
                 />
                 <TextButton> Excluir Paciente </TextButton>
