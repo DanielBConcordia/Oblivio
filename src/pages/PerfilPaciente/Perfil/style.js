@@ -6,14 +6,14 @@ export const Container = styled.View`
 `;
 
 export const PerfilContainer = styled.View`
-    width: 100%; // Corrigido de 'widht' para 'width'
-    height: 33%;
+    width: 100%; 
+    height: 35%;
     background-color: #5C2E7E;
     border-bottom-left-radius: 30px;
     border-bottom-right-radius: 30px;
 `;
 
-//  export const ContainerImage = styled.View`
+// export const ContainerImage = styled.View`
 //      width: 50px; // Corrigido de 'widht' para 'width'
 //      height: 50px;
 //      background-color: #000000;
@@ -39,7 +39,7 @@ export const TextName = styled.Text`
     font-size: 20px;
     color: #FFFFFF;
     text-align: center;
-    top: 75px;
+    top: 80px;
 `;
 
 export const Button = styled.TouchableOpacity`

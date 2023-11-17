@@ -17,7 +17,7 @@ const InfoPaciente = () => {
     const navigation = useNavigation();
 
     const Voltar = () => {
-        navigation.navigate('PerfilCuidador');
+        navigation.navigate('PerfilPaciente');
     }
 
     const Update = () => {

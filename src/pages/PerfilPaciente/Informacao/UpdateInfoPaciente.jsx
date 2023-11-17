@@ -1,20 +1,24 @@
 import React from "react-native";
-import { ScrollView } from "react-native";
 import {
     Container,
     PerfilContainer,
-    Imagem,
-    FormInput
+    Imagem, 
+    Scroll,
+    PerfilContainerUp,
+    FormInput, 
+    TextButton,
+    Update,
+    StyledViewButton,
 } from './style';
 
 const UpdateInfoPaciente = () => {
 
     return (
-        <ScrollView>
+        <Scroll>
             <Container>
-                <PerfilContainer>
-                    <Imagem></Imagem> 
-                </PerfilContainer>
+                <PerfilContainerUp>
+                    <Imagem></Imagem>
+                </PerfilContainerUp>
 
             <FormInput
                 placeholder="Nome da Pessoa"
@@ -50,10 +54,18 @@ const UpdateInfoPaciente = () => {
                 placeholder="---"
             />
             
-    {/* Adicionar botões */}
+            <StyledViewButton>
+                    <Update>
+                        <TextButton> SALVAR </TextButton>
+                    </Update>
+
+                    <Update>
+                        <TextButton> CANCELAR </TextButton>
+                    </Update>
+            </StyledViewButton>
 
         </Container>
-        </ScrollView>
+        </Scroll>
     );
 }
 
