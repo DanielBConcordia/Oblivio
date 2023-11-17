@@ -1,13 +1,30 @@
 import React, { useState } from 'react';
-import { View, StyleSheet, Alert, Text } from 'react-native';
+import {
+    View,
+    Text,
+    StyleSheet,
+    TouchableWithoutFeedback,
+    Keyboard,
+    Alert
+} from 'react-native';
 import auth from '../../utils/firebaseConfig';
+import {
+    Container,
+    Title,
+    Button,
+    TextButton,
+    Campo,
+    InputContainer
+} from "./style";
 
-import { TextConta, MeuButton } from './style';
-import {FormInput} from '../../../styleGlobal';
 
 const RecuperarSenha = () => {
     const [email, setEmail] = useState('');
     const [errors, setErrors] = useState({});
+
+    const dismissKeyboard = () => {
+        Keyboard.dismiss();
+      };
  
     const recover = () => {
     {/* ver se o email está vazio ou não*/} 
@@ -39,24 +56,29 @@ const RecuperarSenha = () => {
     };
 
     return (
-        <View style={styles.container}> 
-            <FormInput
-                style={[(errors.email && formSubmitted) && styles.inputError]}
-                placeholder="Digite seu Email"
-                onChangeText={(text) => setEmail(text)}
-                value={email}
-                keyboardType="email"
-                autoFocus={true}
+    <TouchableWithoutFeedback onPress={dismissKeyboard}>
+      <Container>
+        <Title> Recuperar Senha </Title>
+
+        <InputContainer>
+        <View>
+            <Campo
+              style={[(errors.email && formSubmitted) && styles.inputError]}
+              placeholder="Digite seu Email"
+              value={email}
+              keyboardType="email-address"
+              onChangeText={(text) => setEmail(text)}
+              onSubmitEditing={() => senhaInputRef.current.focus()}
             />
-        <MeuButton onClick={recover}> <Text>Recuperar</Text></MeuButton>
+        <Button onClick={recover}>
+        <TextButton> Recuperar </TextButton>
+        </Button>
         </View>
+        </InputContainer>
+
+        </Container>
+        </TouchableWithoutFeedback>
+        
     );
 };
 export default RecuperarSenha;
-
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        alignItems: 'center',
-    },
-});

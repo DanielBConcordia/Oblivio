@@ -172,7 +172,7 @@ const CadastroCuidador = () => {
       </Form>
     </Container>
     </ScrollView>
-  );s
+  );
 };
 
 const styles = StyleSheet.create({
