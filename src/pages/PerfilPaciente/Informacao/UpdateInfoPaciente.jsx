@@ -10,6 +10,7 @@ import {
     Update,
     StyledViewButton,
 } from './style';
+import { Ionicons } from "@expo/vector-icons";
 
 const UpdateInfoPaciente = () => {
 
@@ -17,6 +18,17 @@ const UpdateInfoPaciente = () => {
         <Scroll>
             <Container>
                 <PerfilContainerUp>
+                <StyledView>
+                        <Ionicons
+                            name="ios-arrow-back" 
+                            style={{
+                                color: '#FFFFFF',
+                                fontSize: 35,
+                            }}
+                            onPress={Voltar}
+                            />
+                </StyledView>
+                
                     <Imagem></Imagem>
                 </PerfilContainerUp>
 
