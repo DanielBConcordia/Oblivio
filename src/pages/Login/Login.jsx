@@ -69,7 +69,12 @@ const Login = () => {
 
     console.log(listPaciente)
 
+    if(listPaciente.length > 0) {
+      navigation.navigate("TelaInicialWP");
+    } else {
       navigation.navigate("TelaInicial");
+    }
+
     } catch (error) {
       console.error("Erro ao fazer login", error);
     }
