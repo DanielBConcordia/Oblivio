@@ -3,7 +3,7 @@ import React, { useContext } from 'react';
 import { useState } from 'react';
 import { TouchableOpacity, StyleSheet, Text, View, Image, Modal } from 'react-native';
 import MapView from 'react-native-maps';
-import { useUser } from '../Contexts/UserContext';
+import { useUser } from '../../Contexts/UserContext';
 import { useNavigation } from '@react-navigation/native';
 import {
     Container,
@@ -12,7 +12,7 @@ import {
     HelloText,
 } from './style';
 import menu from '../../assets/menu.png';
-import Menu from '../pages/Menu/Menu';
+import Menu from '../Menu/Menu';
 
 export default function TelaInicialWP() {
 
