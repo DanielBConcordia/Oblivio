@@ -58,8 +58,23 @@ const Login = () => {
         body
       );
       const userData = response.data;
-      submitLogin(userData);
+      submitLogin(userData, listPaciente);
+
+    const caregiverId = userData.cuidador.id;
+    const patientsResponse = await axios.get(
+      `https://oblivio-api.vercel.app/paciente/caregiver/${caregiverId}/patients`
+    );
+
+    const listPaciente = patientsResponse.data;
+
+    console.log(listPaciente)
+
+    if(listPaciente.length > 0) {
+      navigation.navigate("TelaInicialWP");
+    } else {
       navigation.navigate("TelaInicial");
+    }
+
     } catch (error) {
       console.error("Erro ao fazer login", error);
     }
