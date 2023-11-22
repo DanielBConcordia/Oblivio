@@ -56,15 +56,10 @@ const Menu = () => {
     
             <Text style={styles.txtTitulo}> Menu </Text>
           </View>
+
     
-           <Modal
-            visible={visibleModal}
-            transparent={true}
-            onRequestClose={() => setVisibleModal(false)}
-          >
-          </Modal> 
-    
-          <View style={styles.opcoes} onPress={Perfil}>
+          <View style={styles.opcoes}>
+           <TouchableOpacity onPress={Perfil}> 
             <Image
               source={perfil}
               style={{
@@ -80,6 +75,7 @@ const Menu = () => {
               }}
             ></Image>
             <Text style={styles.txtItem}> Perfil </Text>
+            </TouchableOpacity>
           </View>
     
           <View style={styles.opcoes} onPress={Pessoas}>

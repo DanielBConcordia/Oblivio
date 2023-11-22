@@ -29,6 +29,15 @@ import TelaInicialWP from './src/pages/TelaInicialWP/TelaInicialWP';
 {/* Tela de Menu */ }
 import Menu from './src/pages/Menu/Menu';
 
+{ /* Pagina Principal */ }
+import PaginaPrincipal from './src/pages/PaginaPrincipal/PaginaPrincipal'; 
+
+{ /* Informações do cuidador */ }
+import InfoCuidador from './src/pages/PerfilCuidador/Informacao/InfoCuidador';
+
+{/* Perfil do cuidador */}
+import PerfilCuidador from './src/pages/PerfilCuidador/Perfil/PerfilC';
+
 const Stack = createNativeStackNavigator();
 
 export default function App() {
@@ -38,6 +47,10 @@ export default function App() {
         <UserProvider>
           <NavigationContainer>
             <Stack.Navigator>
+
+              {/* Pagina Principal */}
+
+              <Stack.Screen name="PaginaPrincipal" component={PaginaPrincipal} options={{ title: "", headerShown: false }} />
 
               {/* Cadastro Cuidador */}
 
@@ -65,6 +78,14 @@ export default function App() {
               {/* Tela de Menu */}
 
               <Stack.Screen name="Menu" component={Menu} options={{ title: "", headerShown: false }} />
+
+              {/* Informções do Cuidador */}
+
+              <Stack.Screen name="InfoCuidador" component={InfoCuidador} options={{ title: "", headerShown: false }} />
+
+              {/* Perfil Cuidador */}
+              
+              <Stack.Screen name="PerfilCuidador" component={PerfilCuidador} options={{ title: "", headerShown: false }} />
             </Stack.Navigator>
           </NavigationContainer>
         </UserProvider>

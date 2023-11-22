@@ -67,8 +67,6 @@ const Login = () => {
 
     const listPaciente = patientsResponse.data;
 
-    console.log(listPaciente)
-
     if(listPaciente.length > 0) {
       navigation.navigate("TelaInicialWP");
     } else {

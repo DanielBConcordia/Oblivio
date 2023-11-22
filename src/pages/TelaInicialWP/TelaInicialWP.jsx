@@ -18,6 +18,7 @@ export default function TelaInicialWP() {
     const { userData } = useUser();
     const navigation = useNavigation();
     
+    console.log(userData)
 
     const PgMenu = () => {
         navigation.navigate('Menu')
