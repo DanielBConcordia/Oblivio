@@ -31,10 +31,6 @@ export default function TelaInicial() {
             <MapView style={{ width: '100%', height: '100%' }} />
 
             <Header>
-                <TouchableOpacity>
-                    <Text>Menu</Text>
-                </TouchableOpacity>
-
                 <Title>OBLIVIO</Title>
                 <HelloText>Olá {userData && userData.cuidador.nomeSocial}</HelloText>
 

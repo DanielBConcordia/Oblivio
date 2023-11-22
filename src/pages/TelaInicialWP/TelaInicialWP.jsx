@@ -1,7 +1,7 @@
 import { StatusBar } from 'expo-status-bar';
 import React, { useContext } from 'react';
 import { useState } from 'react';
-import { TouchableOpacity, StyleSheet, Text, View, Image, Modal } from 'react-native';
+import { TouchableOpacity, StyleSheet, Text, View, Image } from 'react-native';
 import MapView from 'react-native-maps';
 import { useUser } from '../../Contexts/UserContext';
 import { useNavigation } from '@react-navigation/native';
@@ -11,18 +11,17 @@ import {
     Title,
     HelloText,
 } from './style';
-import menu from '../../assets/menu.png';
-import Menu from '../Menu/Menu';
+import menu from '../../../assets/menu.png'
 
 export default function TelaInicialWP() {
 
     const { userData } = useUser();
     const navigation = useNavigation();
-    const [visibleModal, setVisibleModal] = useState(false);
+    
 
     const PgMenu = () => {
-        navigation.navigate('Menu');
-        setVisibleModal(true);
+        navigation.navigate('Menu')
+     
     }
 
     return (
@@ -44,14 +43,6 @@ export default function TelaInicialWP() {
                     }}>
                     </Image>
                 </TouchableOpacity>
-
-                <Modal
-                    visible={visibleModal}
-                    transparent={true}
-                    onRequestClose={() => setVisibleModal(false)}
-                >
-                <Menu/>
-                </Modal>
 
                 <Title> OBLIVIO </Title>
                 <HelloText> Olá {userData && userData.cuidador.nomeSocial}</HelloText>

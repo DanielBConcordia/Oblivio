@@ -16,8 +16,6 @@ import perfil from "../../../assets/perfil.png";
 import pessaos from "../../../assets/pessoas.png";
 import sair from "../../../assets/sair.png";
 
-// Pagina inicial
-import TelaInicialWP from "../../TelaInicialWP/TelaInicialWP";
 
 const Menu = () => {
     const [visibleModal, setVisibleModal] = useState(false);
@@ -64,7 +62,6 @@ const Menu = () => {
             transparent={true}
             onRequestClose={() => setVisibleModal(false)}
           >
-             <TelaInicialWP /> 
           </Modal> 
     
           <View style={styles.opcoes} onPress={Perfil}>
