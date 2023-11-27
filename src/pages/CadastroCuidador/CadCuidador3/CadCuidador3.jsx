@@ -1,11 +1,17 @@
 import React, { useState } from 'react';
 import { Text, StyleSheet, Dimensions } from 'react-native';
+
 import * as yup from 'yup';
+import axios from 'axios';
+
+
 import { useNavigation } from '@react-navigation/native';
 import { useFormContext } from '../../../Contexts/FormContext';
-import axios from 'axios';
+
 import { Ionicons } from '@expo/vector-icons'
 
+
+import { View } from './style';
 import {
   FormInput,
   Container,
@@ -17,7 +23,6 @@ import {
 } from '../../../../styleGlobal';
 
 
-import { View } from './style';
 
 const schema = yup.object().shape({
   email: yup.string().email().required("Digite o seu Email"),

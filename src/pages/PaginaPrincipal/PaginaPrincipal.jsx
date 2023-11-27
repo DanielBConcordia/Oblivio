@@ -33,7 +33,11 @@ const TelaPrincipal = () => {
         AsyncStorage.getItem('@oblivioApp')
         .then(token => {
           if (token) {
-            console.log('Usuário logado. Token: ', token)
+            if (listPaciente.lenght > 0) {
+                navigation.navigate('TelaInicialWP')
+            } else {
+                navigation.navigate('TelaInicial')
+            }
 
 
           } else {

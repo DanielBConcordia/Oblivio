@@ -1,5 +1,6 @@
 import React from 'react';
 import { useState } from 'react';
+
 import {
   SafeAreaView,
   View,
@@ -8,8 +9,11 @@ import {
   StyleSheet,
   Image,
    Modal,
+   Button,
 } from "react-native";
+
 import { useNavigation } from '@react-navigation/native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import iconVoltar from "../../../assets/iconVoltar.png";
 import perfil from "../../../assets/perfil.png";
@@ -32,6 +36,19 @@ const Menu = () => {
 
     const Pessoas = () => {
       navigation.navigate('');
+    }
+
+    const logout = () => {
+
+      AsyncStorage.removeItem('@oblivioApp')
+      .then(() => {
+        console.log('Token removido')
+      })
+      .catch(error => {
+        console.log('Erro ao remover token: ', error)
+      })
+
+      navigation.navigate('TelaPrincipal')
     }
 
     return (
@@ -97,7 +114,7 @@ const Menu = () => {
           </View>
     
           <View style={styles.logout}>
-
+              <Button title='Logout' onPress={logout}></Button>
           </View>
 
           {/* <View style={styles.logout}>
