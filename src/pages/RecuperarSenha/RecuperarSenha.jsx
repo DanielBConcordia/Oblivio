@@ -24,61 +24,62 @@ const RecuperarSenha = () => {
 
     const dismissKeyboard = () => {
         Keyboard.dismiss();
-      };
- 
+    };
+
     const recover = () => {
-    {/* ver se o email está vazio ou não*/} 
-      if(email !== ''){ errors
-        console.log(email);
-        auth()
-            .sendPasswordResetEmail(email)
-            .then((r) => {
-                Alert.alert(
-                    'Atenção',
-                    'Enviamos um email de recuperação de senha para o seguinte endereço' +
-                       email, 
-                );
-            })
-            .catch((e) => {
-                console.log('RecuperarSenha: recover:' + e);
-                switch (e.code) {
-                    case 'auth/user-not-found':
-                        Alert.alert('Erro', 'Usuário não cadastrado.');
-                        break;
-                    case 'auth/invalid-email':
-                        Alert.alert('Erro', 'Email inválido');
-                        break;
-                    case 'auth/user-disabled':
-                        Alert.alert('Erro', 'Usuário dasabilitado');
-                }
-            });
+        {/* ver se o email está vazio ou não*/ }
+        if (email !== '') {
+            errors
+            console.log(email);
+            auth()
+                .sendPasswordResetEmail(email)
+                .then((r) => {
+                    Alert.alert(
+                        'Atenção',
+                        'Enviamos um email de recuperação de senha para o seguinte endereço' +
+                        email,
+                    );
+                })
+                .catch((e) => {
+                    console.log('RecuperarSenha: recover:' + e);
+                    switch (e.code) {
+                        case 'auth/user-not-found':
+                            Alert.alert('Erro', 'Usuário não cadastrado.');
+                            break;
+                        case 'auth/invalid-email':
+                            Alert.alert('Erro', 'Email inválido');
+                            break;
+                        case 'auth/user-disabled':
+                            Alert.alert('Erro', 'Usuário dasabilitado');
+                    }
+                });
         }
     };
 
     return (
-    <TouchableWithoutFeedback onPress={dismissKeyboard}>
-      <Container>
-        <Title> Recuperar Senha </Title>
+        <TouchableWithoutFeedback onPress={dismissKeyboard}>
+            <Container>
+                <Title> Recuperar Senha </Title>
 
-        <InputContainer>
-        <View>
-            <Campo
-              style={[(errors.email && formSubmitted) && styles.inputError]}
-              placeholder="Digite seu Email"
-              value={email}
-              keyboardType="email-address"
-              onChangeText={(text) => setEmail(text)}
-              onSubmitEditing={() => senhaInputRef.current.focus()}
-            />
-        <Button onClick={recover}>
-        <TextButton> Recuperar </TextButton>
-        </Button>
-        </View>
-        </InputContainer>
+                <InputContainer>
+                    <View>
+                        <Campo
+                            // style={[(errors.email && formSubmitted) && styles.inputError]}
+                            placeholder="Digite seu Email"
+                            value={email}
+                            keyboardType="email-address"
+                            onChangeText={(text) => setEmail(text)}
+                            onSubmitEditing={() => senhaInputRef.current.focus()}
+                        />
 
-        </Container>
+                    </View>
+                </InputContainer>
+                <Button onClick={recover}>
+                    <TextButton> Recuperar </TextButton>
+                </Button>
+            </Container>
         </TouchableWithoutFeedback>
-        
+
     );
 };
 export default RecuperarSenha;

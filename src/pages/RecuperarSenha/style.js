@@ -15,7 +15,7 @@ export const Title = styled.Text`
 `;
 
 export const Button = styled.TouchableOpacity`
-    width: 80%;
+    width: 75%;
     background-color: #5C2E7E;
     border-radius: 15px;
     margin-top: 20px;
@@ -31,21 +31,21 @@ export const TextButton = styled.Text`
 `;
 
 export const Campo = styled.TextInput`
-    width: 80%;
+    width: 85%;
     margin-top: 14px; 
-    margin-left: 15px;
-    padding: 7px;
+    margin-left: 25px;
+    padding: 5px;
     font-size: 12px;
     border-color: #000000;
-    border-bottom-width: 1px;
+    border-bottom-width: 1px; */
+
 `;
 
 export const InputContainer = styled.View`
-    width: 90%;
-    height: 150px;
+    width: 83%;
+    height: 100px;
     margin-bottom: 3%;
     display: flex;
-    align-items: center;
     background-color: #FFFFFF;
     border-radius: 15px;
     elevation: 3;
