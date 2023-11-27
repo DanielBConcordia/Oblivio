@@ -49,7 +49,6 @@ const InfoCuidador = () => {
                             onPress={Update}
                             />  
                     </StyledView>
-                <Imagem></Imagem> 
                 <TextName> {userData && userData.cuidador.nome} </TextName>
             </PerfilContainer>
             

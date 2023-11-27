@@ -37,10 +37,12 @@ import InfoCuidador from './src/pages/PerfilCuidador/Informacao/InfoCuidador';
 
 {/* Perfil do cuidador */}
 import PerfilCuidador from './src/pages/PerfilCuidador/Perfil/PerfilC';
+import { useEffect } from 'react';
 
 const Stack = createNativeStackNavigator();
 
 export default function App() {
+
   return (
     <FormProvider>
       <FormProvider2>

@@ -11,8 +11,6 @@ export const FormProvider2 = ({ children }) => {
     const updatedData = { ...formData, ...data };
     setFormData(updatedData);
     
-    // Adicione um console.log para verificar as mudanças nos dados
-    console.log('Dados do formulário atualizados:', updatedData);
   };
 
   // Forneça o contexto e o estado para os componentes filhos

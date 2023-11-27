@@ -97,22 +97,25 @@ const Menu = () => {
           </View>
     
           <View style={styles.logout}>
+
+          </View>
+
+          {/* <View style={styles.logout}>
             <Image
               source={sair}
               style={{
                 tintColor: "gray",
                 width: 30,
                 height: 25,
-                //marginTop: '15%',
+                marginTop: '15%',
                 left: "6%",
-                //textAlign:'center',
-                //right: 20,
-                // top: 53.85,
-                // left: 41.36,
+                right: 20,
+                 top: 53.85,
+                 left: 41.36,
               }}
             ></Image>
             <Text style={styles.txtItem}> Log out </Text>
-          </View>
+          </View> */}
     
         </SafeAreaView>
       );
@@ -152,7 +155,7 @@ const styles = StyleSheet.create({
     logout: {
       flexDirection: "row",
       left: 20,
-      marginTop:'110%',
+      marginTop:'90%',
     }
   });
 

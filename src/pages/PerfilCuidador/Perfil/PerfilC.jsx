@@ -34,7 +34,6 @@ const PerfilCuidador = () => {
                         marginLeft: 20, 
                     }}
                 />
-                <Imagem></Imagem> 
                 <TextName> {userData && userData.cuidador.nome} </TextName>
             </PerfilContainer>
 

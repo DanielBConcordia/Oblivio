@@ -1,16 +1,20 @@
 import React, { useState, useEffect } from "react";
+
 import {
   View,
-  Text,
-  StyleSheet,
   TouchableWithoutFeedback,
-  Keyboard,
-  Touchable,
+  Keyboard
 } from "react-native";
+
 import { Ionicons } from "@expo/vector-icons";
+
 import { useNavigation } from "@react-navigation/native";
+
 import axios from "axios";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+
 import { useUser } from "../../Contexts/UserContext";
+
 import {
   Container,
   Title,
@@ -59,6 +63,10 @@ const Login = () => {
       );
       const userData = response.data;
       submitLogin(userData, listPaciente);
+
+      const token = userData.token
+
+      AsyncStorage.setItem('@oblivioApp', token)
 
     const caregiverId = userData.cuidador.id;
     const patientsResponse = await axios.get(
