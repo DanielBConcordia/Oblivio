@@ -40,7 +40,7 @@ const Menu = () => {
 
   const logout = () => {
 
-    AsyncStorage.removeItem('@oblivioApp')
+    AsyncStorage.removeItem('@oblivioApp:userData', '@oblivioApp:listPaciente')
       .then(() => {
         console.log('Token removido')
       })

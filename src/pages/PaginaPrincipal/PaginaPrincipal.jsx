@@ -30,23 +30,7 @@ const TelaPrincipal = () => {
         navigation.navigate('Login');
     }
 
-    // useEffect(() => {
-    //     AsyncStorage.getItem('@oblivioApp')
-    //     .then(token => {
-    //       if (token) {
-    //         if (listPaciente.lenght > 0) {
-    //             navigation.navigate('TelaInicialWP')
-    //         } else {
-    //             navigation.navigate('TelaInicial')
-    //         }
 
-
-    //       } else {
-    //         console.log('Usuário não logado, fazer login')
-    //         navigation.navigate("PaginaPrincipal")
-    //       }
-    //     })
-    //   })
 
     useEffect(() => {
         const retrieveUserData = async () => {
@@ -68,6 +52,7 @@ const TelaPrincipal = () => {
                 console.log("Erro ao recuperar informações do usuário", error);
             }
         }
+        retrieveUserData();
     })
 
       
