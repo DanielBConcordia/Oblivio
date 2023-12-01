@@ -66,7 +66,9 @@ const Login = () => {
 
       const token = userData.token
 
-      AsyncStorage.setItem('@oblivioApp', token)
+      // AsyncStorage.setItem('@oblivioApp', token)
+
+      await AsyncStorage.setItem('@oblivioApp:userData', JSON.stringify(userData))
 
     const caregiverId = userData.cuidador.id;
     const patientsResponse = await axios.get(
@@ -74,6 +76,9 @@ const Login = () => {
     );
 
     const listPaciente = patientsResponse.data;
+
+
+    await AsyncStorage.setItem('@oblivioApp:listPaciente', JSON.stringify(listPaciente))
 
     if(listPaciente.length > 0) {
       navigation.navigate("TelaInicialWP");
