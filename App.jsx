@@ -37,7 +37,9 @@ import InfoCuidador from './src/pages/PerfilCuidador/Informacao/InfoCuidador';
 
 {/* Perfil do cuidador */}
 import PerfilCuidador from './src/pages/PerfilCuidador/Perfil/PerfilC';
-import { useEffect } from 'react';
+
+{/* Lista de Pacientes */}
+import ListPaciente from './src/pages/ListPaciente/ListPaciente';
 
 const Stack = createNativeStackNavigator();
 
@@ -88,6 +90,11 @@ export default function App() {
               {/* Perfil Cuidador */}
               
               <Stack.Screen name="PerfilCuidador" component={PerfilCuidador} options={{ title: "", headerShown: false }} />
+
+              {/* Lista de Pacientes */}
+
+              <Stack.Screen name="ListPaciente" component={ListPaciente} options={{ title: "", headerShown: false }} />
+
             </Stack.Navigator>
           </NavigationContainer>
         </UserProvider>
