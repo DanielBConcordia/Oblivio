@@ -46,8 +46,19 @@ const TelaPrincipal = () => {
                     const lisPaciente = JSON.parse(listPacienteString) || [];
 
                     submitLogin(userData, lisPaciente);
+
+                    if (userData) {
+                        if (listPaciente > 0) {
+                            navigation.navigate('TelaInicialWP');
+                        } else {
+                            navigation.navigate('TelaInicial')
+                        }
+                    } else {
+                        console.log("Usuário não logado")
+                    }
                     
                 }
+
             } catch (error) {
                 console.log("Erro ao recuperar informações do usuário", error);
             }
