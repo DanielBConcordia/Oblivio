@@ -34,37 +34,34 @@ const TelaPrincipal = () => {
 
     useEffect(() => {
         const retrieveUserData = async () => {
-            try {
-                const userDataString = await AsyncStorage.getItem('@oblivioApp:userData');
-
-                const listPacienteString = await AsyncStorage.getItem('@oblivioApp:listPaciente');
-
-                
-                if(userDataString && listPacienteString) {
-                    const userData = JSON.parse(userDataString);
-
-                    const lisPaciente = JSON.parse(listPacienteString) || [];
-
-                    submitLogin(userData, lisPaciente);
-
-                    if (userData) {
-                        if (listPaciente > 0) {
-                            navigation.navigate('TelaInicialWP');
-                        } else {
-                            navigation.navigate('TelaInicial')
-                        }
-                    } else {
-                        console.log("Usuário não logado")
-                    }
-                    
+          try {
+            const userDataString = await AsyncStorage.getItem('@oblivioApp:userData');
+            const listPacienteString = await AsyncStorage.getItem('@oblivioApp:listPaciente');
+      
+            if (userDataString) {
+              const userData = JSON.parse(userDataString);
+              const listPaciente = JSON.parse(listPacienteString) || [];
+      
+              submitLogin(userData, listPaciente);
+      
+              if (userData.token) {
+                // Verificar se o token está presente para determinar se o usuário está autenticado
+                if (listPaciente.length > 0) {
+                  navigation.navigate('TelaInicialWP');
+                } else {
+                  navigation.navigate('TelaInicial');
                 }
-
-            } catch (error) {
-                console.log("Erro ao recuperar informações do usuário", error);
+              } else {
+                console.log('Usuário não logado');
+              }
             }
-        }
+          } catch (error) {
+            console.log('Erro ao recuperar informações do usuário', error);
+          }
+        };
+      
         retrieveUserData();
-    })
+      }, []);      
 
       
 

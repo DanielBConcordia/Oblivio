@@ -35,7 +35,7 @@ const Menu = () => {
   }
 
   const Pessoas = () => {
-    navigation.navigate('');
+    navigation.navigate('ListaPaciente');
   }
 
   const logout = () => {
