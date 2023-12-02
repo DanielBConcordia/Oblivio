@@ -4,7 +4,6 @@ import {
     Container,
     PerfilContainer,
     TextName,
-    Imagem,
     Button,
     Buttonn,
     TextButton
@@ -22,17 +21,22 @@ const PerfilCuidador = () => {
         navigation.navigate('InfoCuidador');
     }
 
+    const MenuPage = () => {
+        navigation.navigate('Menu')
+    }
+
     return (
         <Container>
             <PerfilContainer>
                 <Ionicons
-                    name="ios-menu"
+                    name="ios-arrow-back"
                     style={{
                         color: '#FFFFFF',
                         fontSize: 35,
                         marginTop: 43,
                         marginLeft: 20, 
                     }}
+                    onPress={MenuPage}
                 />
                 <TextName> {userData && userData.cuidador.nome} </TextName>
             </PerfilContainer>

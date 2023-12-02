@@ -40,7 +40,7 @@ const Menu = () => {
 
   const logout = () => {
 
-    AsyncStorage.removeItem('@oblivioApp:userData', '@oblivioApp:listPaciente')
+    AsyncStorage.removeItem('@oblivioApp:userData')
       .then(() => {
         console.log('Token removido')
       })
@@ -48,7 +48,15 @@ const Menu = () => {
         console.log('Erro ao remover token: ', error)
       })
 
-    navigation.navigate('TelaPrincipal')
+    AsyncStorage.removeItem('@oblivioApp:listPaciente')
+      .then(() => {
+        console.log("Token Paciente removido")
+      })
+      .catch(error => {
+        console.log('Erro ao remover token list paciente', error)
+      })
+
+    navigation.navigate('PaginaPrincipal');
   }
 
   return (
