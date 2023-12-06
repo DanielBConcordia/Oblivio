@@ -7,9 +7,9 @@ const validacaoEmail = () => {
     return(
         <View>
             <Text> Clique no botão após realizar a validação</Text>
-            <Button title="verificar" onPress={}></Button>
+            <Button title="verificar" onPress={enviarValidacao}></Button>
         </View>
     )
 }
 
-export default validacaoEmail;
+export default CadastroCuidador3;
