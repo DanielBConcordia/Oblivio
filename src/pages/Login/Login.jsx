@@ -62,24 +62,26 @@ const Login = () => {
         body
       );
       const userData = response.data;
-      submitLogin(userData, listPaciente);
 
-      const token = userData.token
 
-      AsyncStorage.setItem('@oblivioApp', token)
+      await AsyncStorage.setItem('@oblivioApp:userData', JSON.stringify(userData))
 
-    const caregiverId = userData.cuidador.id;
-    const patientsResponse = await axios.get(
-      `https://oblivio-api.vercel.app/paciente/caregiver/${caregiverId}/patients`
-    );
+      const caregiverId = userData.cuidador.id;
+      const patientsResponse = await axios.get(
+        `https://oblivio-api.vercel.app/paciente/caregiver/${caregiverId}/patients`
+      );
 
-    const listPaciente = patientsResponse.data;
+      const pacienteList = patientsResponse.data;
+      submitLogin(userData, pacienteList);
 
-    if(listPaciente.length > 0) {
-      navigation.navigate("TelaInicialWP");
-    } else {
-      navigation.navigate("TelaInicial");
-    }
+
+      await AsyncStorage.setItem('@oblivioApp:listPaciente', JSON.stringify(pacienteList))
+
+      if (pacienteList.length > 0) {
+        navigation.navigate("TelaInicialWP");
+      } else {
+        navigation.navigate("TelaInicial");
+      }
 
     } catch (error) {
       console.error("Erro ao fazer login", error);

@@ -30,14 +30,31 @@ import TelaInicialWP from './src/pages/TelaInicialWP/TelaInicialWP';
 import Menu from './src/pages/Menu/Menu';
 
 { /* Pagina Principal */ }
-import PaginaPrincipal from './src/pages/PaginaPrincipal/PaginaPrincipal'; 
+import PaginaPrincipal from './src/pages/PaginaPrincipal/PaginaPrincipal';
 
 { /* Informações do cuidador */ }
 import InfoCuidador from './src/pages/PerfilCuidador/Informacao/InfoCuidador';
 
-{/* Perfil do cuidador */}
+{/* Perfil do cuidador */ }
 import PerfilCuidador from './src/pages/PerfilCuidador/Perfil/PerfilC';
-import { useEffect } from 'react';
+
+{/* Lista de Pacientes */ }
+import ListPaciente from './src/pages/ListPaciente/ListPaciente';
+
+{/* Informações do paciente */ }
+import InfoPaciente from './src/pages/PerfilPaciente/Informacao/InfoPaciente';
+
+{/* Perfil do pacinete */ }
+import PerfilPaciente from './src/pages/PerfilPaciente/Perfil/PerfilP';
+
+{/* Lista de cuidadores */ }
+import ListCuidadores from './src/pages/ListCuidadores/ListCuidadores';
+
+{/* Página do qr code */ }
+import QrCodePage from './src/pages/QrCodePage/QrCodePage'
+
+{/* Info page qr code */ }
+import PatientInfoPage from './src/pages/QrCodePage/PatientInfoPage';
 
 const Stack = createNativeStackNavigator();
 
@@ -86,8 +103,33 @@ export default function App() {
               <Stack.Screen name="InfoCuidador" component={InfoCuidador} options={{ title: "", headerShown: false }} />
 
               {/* Perfil Cuidador */}
-              
+
               <Stack.Screen name="PerfilCuidador" component={PerfilCuidador} options={{ title: "", headerShown: false }} />
+
+              {/* Lista de Pacientes */}
+
+              <Stack.Screen name="ListPaciente" component={ListPaciente} options={{ title: "", headerShown: false }} />
+
+              {/* Informações do paciente */}
+
+              <Stack.Screen name="InfoPaciente" component={InfoPaciente} options={{ title: "", headerShown: false }} />
+
+              {/* Perfil do paciente */}
+
+              <Stack.Screen name="PerfilPaciente" component={PerfilPaciente} options={{ title: "", headerShown: false }} />
+
+              {/* Lista de Cuidadores */}
+
+              <Stack.Screen name="ListCuidadores" component={ListCuidadores} options={{ title: "", headerShown: false }} />
+
+              {/* Página do qrCode */}
+
+              <Stack.Screen name="QrCodePage" component={QrCodePage} options={{ title: "", headerShown: false }} />
+
+              {/* Patient info Page */}
+
+              <Stack.Screen name="PatientInfoPage" component={PatientInfoPage} options={{ title: "", headerShown: false }} />
+
             </Stack.Navigator>
           </NavigationContainer>
         </UserProvider>

@@ -12,8 +12,7 @@ export const FormInput = styled.TextInput`
         border: none;
     };
     padding-bottom: 2px;
-    padding-left: 10px;
-    placeholder-text-color: #7f7f7f      
+    padding-left: 10px;     
 `;
 
 // Container de Cuidador
@@ -39,7 +38,7 @@ export const Form = styled.View`
     padding: 20px;
     padding-top: 35px;
 `;
- 
+
 // Titulo de Cuidador
 export const Title = styled.Text`
     font-size: 20px;

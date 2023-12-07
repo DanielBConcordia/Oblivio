@@ -1,7 +1,10 @@
 import React, { useState } from 'react';
 import { StyleSheet, Dimensions, Text } from 'react-native';
+import ModalDropdown from 'react-native-modal-dropdown';
+
 import * as yup from 'yup';
 import { useNavigation } from '@react-navigation/native';
+
 import { useFormContext } from '../../../Contexts/FormContext2';
 
 import {
@@ -16,7 +19,7 @@ import {
 const schema = yup.object().shape({
     nomeCompP: yup.string().required("Digite o Nome Completo"),
     dataNascP: yup.string().required("Digite a Data de Nascimento").matches(/^(0[1-9]|[12][0-9]|3[01])\/(0[1-9]|1[0-2])\/\d{4}$/, "Digite uma data válida (dd/mm/yyyy)"),
-    cpfP: yup.string().min(11, "Digite corretamente o CPF").max(11, "Digite corretamente o CPF").required("Digite seu CPF"),
+    cpfP: yup.string().min(14, "Digite corretamente o CPF").max(14, "Digite corretamente o CPF").required("Digite seu CPF"),
     tipoSang: yup.string().min(3, "Digite corretamente o tipo sanguíneo").required("Digite o tipo sanguíneo"),
     dificuldade: yup.string().required("Digite a dificuldade da pessoa"),
     responsavel: yup.string().required("Digite o nome do responsável pela pessoa"),
@@ -30,7 +33,7 @@ const CadastroPaciente = () => {
     const [nomeCompP, setNomeCompP] = useState('');
     const [dataNascP, setDataNascP] = useState('');
     const [cpfP, setCpfP] = useState('');
-    const [tipoSang, setTipoSang] = useState('');
+    const [tipoSang, setTipoSang] = useState('', (value) => updateFormData({ tipoSang: value }));
     const [dificuldade, setDificuldade] = useState('');
     const [responsavel, setResponsavel] = useState('');
     const [errors, setErrors] = useState({});
@@ -41,6 +44,10 @@ const CadastroPaciente = () => {
 
     const navigation = useNavigation();
 
+    const tipoSangOptions = ['A+', 'A-', 'B+', 'B-', 'O+', 'O-', 'AB+', 'AB-'];
+    const tipoSangApiValues = ['A_POSITIVO', 'A_NEGATIVO', 'B_POSITIVO', 'B_NEGATIVO', 'O_POSITIVO', 'O_NEGATIVO', 'AB_POSITIVO', 'AB_NEGATIVO'];
+
+
     const handleCadastroP = () => {
         setFormSubmitted(true);
 
@@ -50,7 +57,7 @@ const CadastroPaciente = () => {
                 const formattedDataNascimento = dataNascP.replace(/\//g, '');
                 const userData = {
                     nomeCompP,
-                    dataNascP: formattedDataNascimento,
+                    dataNascP,
                     cpfP,
                     tipoSang,
                     dificuldade,
@@ -119,13 +126,22 @@ const CadastroPaciente = () => {
                 />
                 {(errors.cpfP && formSubmitted) && <Text style={styles.labelError}> {errors.cpfP} </Text>}
 
-                <FormInput
-                    style={[(errors.tipoSang && formSubmitted) && styles.inputError && isFocused]}
-                    placeholder="Digite seu tipo sanguíneo"
-                    onChangeText={(text) => setTipoSang(text)}
-                    value={tipoSang}
-                />
+                <ModalDropdown
+                    options={tipoSangOptions}
+                    defaultValue="Selecione o tipo sanguíneo"
+                    onSelect={(index, value) => {
+                        setTipoSang(tipoSangApiValues[index])
+                    }}
+                >
+                    <FormInput
+                        placeholder="Selecione o tipo sanguíneo"
+                        value={tipoSangOptions[tipoSangApiValues.indexOf(tipoSang)]}
+                        editable={false}
+                    />
+                </ModalDropdown>
                 {(errors.tipoSang && formSubmitted) && <Text style={styles.labelError}> {errors.tipoSang} </Text>}
+
+
 
                 <FormInput
                     style={[(errors.dificuldade && formSubmitted) && styles.inputError && isFocused]}

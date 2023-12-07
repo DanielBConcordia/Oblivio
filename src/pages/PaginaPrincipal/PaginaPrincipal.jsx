@@ -19,7 +19,8 @@ import Logo from '../../../assets/logo_obv.png';
 const TelaPrincipal = () => {
 
     const navigation = useNavigation();
-    const { listPaciente } = useUser();
+    const { listPaciente, submitLogin } = useUser();
+    
 
     const CadPage = () => {
         navigation.navigate('CadastroCuidador');
@@ -29,23 +30,40 @@ const TelaPrincipal = () => {
         navigation.navigate('Login');
     }
 
+
+
     useEffect(() => {
-        AsyncStorage.getItem('@oblivioApp')
-        .then(token => {
-          if (token) {
-            if (listPaciente.lenght > 0) {
-                navigation.navigate('TelaInicialWP')
-            } else {
-                navigation.navigate('TelaInicial')
+        const retrieveUserData = async () => {
+          try {
+            const userDataString = await AsyncStorage.getItem('@oblivioApp:userData');
+            const listPacienteString = await AsyncStorage.getItem('@oblivioApp:listPaciente');
+      
+            if (userDataString) {
+              const userData = JSON.parse(userDataString);
+              const listPaciente = JSON.parse(listPacienteString) || [];
+      
+              submitLogin(userData, listPaciente);
+      
+              if (userData.token) {
+                // Verificar se o token está presente para determinar se o usuário está autenticado
+                if (listPaciente.length > 0) {
+                  navigation.navigate('TelaInicialWP');
+                } else {
+                  navigation.navigate('TelaInicial');
+                }
+              } else {
+                console.log('Usuário não logado');
+              }
             }
-
-
-          } else {
-            console.log('Usuário não logado, fazer login')
-            navigation.navigate("PaginaPrincipal")
+          } catch (error) {
+            console.log('Erro ao recuperar informações do usuário', error);
           }
-        })
-      })
+        };
+      
+        retrieveUserData();
+      }, []);      
+
+      
 
     return (
 
