@@ -4,7 +4,7 @@ import * as yup from 'yup';
 import { useNavigation } from '@react-navigation/native';
 import { useFormContext } from '../../../Contexts/FormContext';
 
-import { 
+import {
   FormInput,
   Container,
   Form,
@@ -12,7 +12,7 @@ import {
   SubTitle,
   NextButton,
   TextButton
- } from '../../../../styleGlobal';
+} from '../../../../styleGlobal';
 
 import {
   TextConta,
@@ -54,7 +54,7 @@ const CadastroCuidador = () => {
       .then(() => {
         const formattedDataNascimento = dataNascimento.replace(/\//g, '');
         const userData = {
-          dataNascimento: formattedDataNascimento,
+          dataNascimento,
           nomeComp,
           cpf,
           telefone,
@@ -74,8 +74,7 @@ const CadastroCuidador = () => {
           submitForm(userData);
 
           // Substitua a rota abaixo pela rota que você criou
-          navigation.navigate('CadastroCuidador2'); 
-          console.log('Dados do Usuário em JSON:', userData);
+          navigation.navigate('CadastroCuidador2');
           setErrors({});
         }
       })
@@ -109,70 +108,70 @@ const CadastroCuidador = () => {
 
   return (
     <ScrollView>
-   <Container>
-      <Title> Cadastre-se</Title>
-      <SubTitle>Crie uma conta para continuar</SubTitle>
-      <Form> 
-        <FormInput
-          style={[(errors.nomeComp && formSubmitted) && styles.inputError && isFocused]}
-          placeholder="Digite seu Nome Completo"
-          onChangeText={(text) => setNomeComp(text)}
-          value={nomeComp}
-          onFocus={handleFocus}
-          onBlur={handleBlur}
-        />
-        {(errors.nomeComp && formSubmitted) && <Text style={styles.labelError}> {errors.nomeComp} </Text>}
+      <Container>
+        <Title> Cadastre-se</Title>
+        <SubTitle>Crie uma conta para continuar</SubTitle>
+        <Form>
+          <FormInput
+            style={[(errors.nomeComp && formSubmitted) && styles.inputError && isFocused]}
+            placeholder="Digite seu Nome Completo"
+            onChangeText={(text) => setNomeComp(text)}
+            value={nomeComp}
+            onFocus={handleFocus}
+            onBlur={handleBlur}
+          />
+          {(errors.nomeComp && formSubmitted) && <Text style={styles.labelError}> {errors.nomeComp} </Text>}
 
-        <FormInput
-          style={[(errors.dataNascimento && formSubmitted) && styles.inputError]}
-          placeholder="Digite sua Data de Nascimento"
-          value={dataNascimento}
-          onChangeText={(text) => formatDataNascimento(text)}
-          keyboardType="numeric"
-          maxLength={10}
-        />
-        {(errors.dataNascimento && formSubmitted) && <Text style={styles.labelError}> {errors.dataNascimento} </Text>}
+          <FormInput
+            style={[(errors.dataNascimento && formSubmitted) && styles.inputError]}
+            placeholder="Digite sua Data de Nascimento"
+            value={dataNascimento}
+            onChangeText={(text) => formatDataNascimento(text)}
+            keyboardType="numeric"
+            maxLength={10}
+          />
+          {(errors.dataNascimento && formSubmitted) && <Text style={styles.labelError}> {errors.dataNascimento} </Text>}
 
-        <FormInput
-          style={[(errors.cpf && formSubmitted) && styles.inputError]}
-          placeholder="DIgite seu CPF"
-          onChangeText={(text) => setCpf(text)}
-          value={cpf}
-        />
-        {(errors.cpf && formSubmitted) && <Text style={styles.labelError}> {errors.cpf} </Text>}
+          <FormInput
+            style={[(errors.cpf && formSubmitted) && styles.inputError]}
+            placeholder="DIgite seu CPF"
+            onChangeText={(text) => setCpf(text)}
+            value={cpf}
+          />
+          {(errors.cpf && formSubmitted) && <Text style={styles.labelError}> {errors.cpf} </Text>}
 
-        <FormInput
-          style={[(errors.telefone && formSubmitted) && styles.inputError]}
-          placeholder="Digite seu Telefone"
-          onChangeText={(text) => setTelefone(text)}
-          value={telefone}
-          keyboardType="numeric"
-        />
-        {(errors.telefone && formSubmitted) && <Text style={styles.labelError}> {errors.telefone} </Text>}
+          <FormInput
+            style={[(errors.telefone && formSubmitted) && styles.inputError]}
+            placeholder="Digite seu Telefone"
+            onChangeText={(text) => setTelefone(text)}
+            value={telefone}
+            keyboardType="numeric"
+          />
+          {(errors.telefone && formSubmitted) && <Text style={styles.labelError}> {errors.telefone} </Text>}
 
-        <FormInput
-          style={[(errors.telefoneRes && formSubmitted) && styles.inputError]}
-          placeholder="Digite um Telefone Reserva"
-          onChangeText={(text) => setTelefoneRes(text)}
-          value={telefoneRes}
-          keyboardType="numeric"
-        />
-        {(errors.telefoneRes && formSubmitted) && <Text style={styles.labelError}> {errors.telefoneRes} </Text>}
+          <FormInput
+            style={[(errors.telefoneRes && formSubmitted) && styles.inputError]}
+            placeholder="Digite um Telefone Reserva"
+            onChangeText={(text) => setTelefoneRes(text)}
+            value={telefoneRes}
+            keyboardType="numeric"
+          />
+          {(errors.telefoneRes && formSubmitted) && <Text style={styles.labelError}> {errors.telefoneRes} </Text>}
 
-        <NextButton onPress={handleCadastro}>
-          <TextButton> Próximo </TextButton>
-        </NextButton>
+          <NextButton onPress={handleCadastro}>
+            <TextButton> Próximo </TextButton>
+          </NextButton>
 
-        <TextConta> Já possui uma conta? </TextConta>
+          <TextConta> Já possui uma conta? </TextConta>
           <LoginButton onPress={switchPage}>
             <TextLogin> Fazer login </TextLogin>
           </LoginButton>
-        
-        
-      </Form>
-    </Container>
+
+
+        </Form>
+      </Container>
     </ScrollView>
-  );s
+  ); s
 };
 
 const styles = StyleSheet.create({
@@ -182,7 +181,7 @@ const styles = StyleSheet.create({
 
   labelError: {
     color: '#ff375b',
-    marginBottom: windowHeight * 0.02, 
+    marginBottom: windowHeight * 0.02,
   }
 });
 

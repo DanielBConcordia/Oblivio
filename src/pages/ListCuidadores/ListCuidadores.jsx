@@ -1,53 +1,43 @@
 import { FlatList, StyleSheet, Text, View, Image, SafeAreaView, TouchableOpacity } from 'react-native';
-import { Divider } from 'react-native-elements';
-import ModalDropdown from 'react-native-modal-dropdown';
 import { useUser } from '../../Contexts/UserContext';
-import { useNavigation } from '@react-navigation/native';
-import { AddPac, TextPac } from '../../pages/TelaInicial/style'
 
-export default function ListPaciente() {
-    const { listPaciente, selecionarPaciente } = useUser();
-    const navigaton = useNavigation();
+export default function ListCuidadores() {
 
+    const { cuidadoresList } = useUser();
 
-    const handlePacientePress = (paciente) => {
-        // Faça o que quiser com as informações do paciente clicado
-        selecionarPaciente(paciente)
-
-        navigaton.navigate("PerfilPaciente")
-    };
-
-    const adicionarPaciente = () => {
-        navigaton.navigate('CadastroPaciente')
+    const handleCuidadorPress = (cuidador) => {
+        console.log('Cuidador selecionado', cuidador)
     }
+
+
+
 
     return (
         <View style={styles.container}>
             <View style={styles.header}>
-                <Text style={styles.textTitulo}>Pacientes</Text>
+                <Text style={styles.textTitulo}>Cuidadores</Text>
             </View>
 
             <FlatList
-                data={listPaciente}  // Alteração aqui para usar a lista de pacientes do contexto
+                data={cuidadoresList}  // Alteração aqui para usar a lista de pacientes do contexto
                 keyExtractor={(item) => item.id.toString()}  // Ajuste para garantir que a chave seja uma string
                 renderItem={({ item }) => (
 
-                    <TouchableOpacity onPress={() => handlePacientePress(item)}>
+                    <TouchableOpacity onPress={() => handleCuidadorPress(item)}>
                         <View style={styles.itens}>
-                            <Image
-                                style={styles.foto}
-                                source={{ uri: item.foto }}  // Use a propriedade correta da imagem do cuidador
-                            />
-                            <Text style={styles.textItens}>{item.nome}</Text>
+                            {item.fotoPerfil && item.fotoPerfil.data ? (
+                                <Image
+                                    style={styles.foto}
+                                    source={{ uri: `data:image/jpeg;base64,${item.fotoPerfil.data.toString('base64')}` }}
+                                />
+                            ) : (
+                                <Text style={styles.defaultImage}>Imagem não disponível</Text>
+                            )}
+                            <Text style={styles.textItens}>{item.nomeSocial || item.nome}</Text>
                         </View>
                     </TouchableOpacity>
                 )}
             />
-            <View>
-                <AddPac onPress={adicionarPaciente}>
-                    <TextPac>Adicionar Paciente</TextPac>
-                </AddPac>
-            </View>
         </View>
     );
 }
@@ -171,6 +161,12 @@ const styles = StyleSheet.create({
         marginRight: 20,
         paddingTop: 1,
         zIndex: 1
+    },
+    defaultImage: {
+        color: 'gray',
+        fontSize: 16,
+        textAlign: 'center',
+        margin: '4%'
     }
 
 });

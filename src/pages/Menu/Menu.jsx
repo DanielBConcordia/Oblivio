@@ -35,7 +35,7 @@ const Menu = () => {
   }
 
   const Pessoas = () => {
-    navigation.navigate('ListaPaciente');
+    navigation.navigate('ListPaciente');
   }
 
   const logout = () => {
@@ -101,36 +101,36 @@ const Menu = () => {
 
       <View style={styles.opcoes}>
         <TouchableOpacity onPress={Pessoas} style={{ flexDirection: 'row', alignItems: 'center' }}>
-        <Image
-          source={pessaos}
-          style={{
-            tintColor: "gray",
-            width: 30,
-            height: 25,
-            marginRight: 5, // Espaço entre a imagem e o texto
-          }}
+          <Image
+            source={pessaos}
+            style={{
+              tintColor: "gray",
+              width: 30,
+              height: 25,
+              marginRight: 5, // Espaço entre a imagem e o texto
+            }}
           />
-        <Text style={styles.txtItem}> Pacientes </Text>
+          <Text style={styles.txtItem}> Pacientes </Text>
         </TouchableOpacity>
       </View>
 
       <View style={styles.opcoesS}>
         <TouchableOpacity onPress={logout} style={{ flexDirection: 'row', alignItems: 'center', }}>
           <Image
-          source={sair}
-          style={{
-            tintColor: "gray",
-            width: 30,
-            height: 25,
-            marginRight: 5, // Espaço entre a imagem e o texto
-          }}
+            source={sair}
+            style={{
+              tintColor: "gray",
+              width: 30,
+              height: 25,
+              marginRight: 5, // Espaço entre a imagem e o texto
+            }}
           />
           <Text style={styles.txtItem}> Sair </Text>
 
         </TouchableOpacity>
       </View>
 
-      </SafeAreaView>
+    </SafeAreaView>
   );
 }
 
@@ -167,7 +167,7 @@ const styles = StyleSheet.create({
   },
   opcoesS: {
     left: 20,
-    flex: 1, 
+    flex: 1,
     justifyContent: 'flex-end',
     bottom: 20,
   }

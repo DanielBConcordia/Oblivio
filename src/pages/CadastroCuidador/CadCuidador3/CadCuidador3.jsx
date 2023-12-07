@@ -3,10 +3,12 @@ import { Text, StyleSheet, Dimensions } from 'react-native';
 
 import * as yup from 'yup';
 import axios from 'axios';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 
 import { useNavigation } from '@react-navigation/native';
 import { useFormContext } from '../../../Contexts/FormContext';
+import { useUser } from '../../../Contexts/UserContext';
 
 import { Ionicons } from '@expo/vector-icons'
 
@@ -19,7 +21,7 @@ import {
   Title,
   SubTitle,
   NextButton,
-  TextButton 
+  TextButton
 } from '../../../../styleGlobal';
 
 
@@ -45,41 +47,47 @@ const CadastroCuidador3 = () => {
   const [showPassword, setShowPassword] = useState(false);
 
   const { submitForm, formData } = useFormContext();
+  const { submitLogin } = useUser();
   const navigation = useNavigation();
 
   async function handleSignIn(formData) {
     let body = {
-      cpf            : formData.cpf,
-      dtNascimento   : formData.dataNascimento,
-      email          : email,
-      telefone       : formData.telefone,
+      cpf: formData.cpf,
+      dtNascimento: formData.dataNascimento,
+      email: email,
+      telefone: formData.telefone,
       telefoneReserva: formData.telefoneRes,
-      nomeSocial     : apelido,
-      nome           : formData.nomeComp,
-      senha          : senha,
-      rua            : formData.rua,
-      cep            : formData.cep,
-      bairro         : formData.bairro,
-      numeroCasa     : formData.numero,
-      cidade         : formData.cidade,
-      uf             : formData.uf,
+      nomeSocial: apelido,
+      nome: formData.nomeComp,
+      senha: senha,
+      rua: formData.rua,
+      cep: formData.cep,
+      bairro: formData.bairro,
+      numeroCasa: formData.numero,
+      cidade: formData.cidade,
+      uf: formData.uf,
       complementoCasa: formData.complemento,
       pontoReferencia: formData.pontRef,
     }
-  let headers = {
-        "Acces-Control-Allow-Origin": "*",
-        "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS"
-      }
-  
-      try {
-        console.log("Teste", body);
-        const response = await axios.post('https://oblivio-api.vercel.app/cuidador/cad/', body, headers );
-  
-        console.log(response);
-      } catch (error) {
-        console.error("Erro ao cadastrar", error);
+    let headers = {
+      "Acces-Control-Allow-Origin": "*",
+      "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS"
     }
+
+    try {
+
+      const response = await axios.post('https://oblivio-api.vercel.app/cuidador/cad/', body, headers);
+
+      const userData = response.data;
+
+      await AsyncStorage.setItem('@oblivioApp:userData', JSON.stringify(userData));
+      submitLogin(userData);
+
+
+    } catch (error) {
+      console.error("Erro ao cadastrar", error);
     }
+  }
 
   const handleCadastro3 = () => {
     setFormSubmitted(true);
@@ -94,9 +102,10 @@ const CadastroCuidador3 = () => {
         };
 
         submitForm(userData);
-        handleSignIn(formData)
-        navigation.navigate('TesteCorrect');
-        console.log('Dados Finais em JSON:', userData);
+        handleSignIn(formData);
+
+        navigation.navigate('TelaInicial');
+
         setErrors({});
       })
       .catch((error) => {
@@ -117,31 +126,30 @@ const CadastroCuidador3 = () => {
           placeholder="Digite seu Email"
           onChangeText={(text) => setEmail(text)}
           value={email}
-          keyboardType="email"
 
         />
         {(errors.email && formSubmitted) && <Text style={styles.labelError}> {errors.email} </Text>}
 
-      <View>
-        <FormInput
-          style={[(errors.senha && formSubmitted) && styles.inputError]}
-          placeholder="Digite sua senha"
-          value={senha}
-          onChangeText={(text) => setSenha(text)}
-          secureTextEntry={!showPassword} //Usando a propriedade secureTextEntry para ocultar/mostrar a senha 
-        />
-
-        <Ionicons
-          name={showPassword ? 'eye' : 'eye-off'}
-          style={{
-            color: "#000000",
-            fontSize: 22,
-            marginRight: 50,
-            marginTop: 20,
-          }}
-          onPress={() => setShowPassword(!showPassword)}
+        <View>
+          <FormInput
+            style={[(errors.senha && formSubmitted) && styles.inputError]}
+            placeholder="Digite sua senha"
+            value={senha}
+            onChangeText={(text) => setSenha(text)}
+            secureTextEntry={!showPassword} //Usando a propriedade secureTextEntry para ocultar/mostrar a senha 
           />
-      </View>
+
+          <Ionicons
+            name={showPassword ? 'eye' : 'eye-off'}
+            style={{
+              color: "#000000",
+              fontSize: 22,
+              marginRight: 50,
+              marginTop: 20,
+            }}
+            onPress={() => setShowPassword(!showPassword)}
+          />
+        </View>
         {(errors.senha && formSubmitted) && <Text style={styles.labelError}> {errors.senha} </Text>}
 
         <FormInput
@@ -153,10 +161,10 @@ const CadastroCuidador3 = () => {
         {(errors.apelido && formSubmitted) && <Text style={styles.labelError}> {errors.apelido} </Text>}
 
 
-        
-          <NextButton onPress={handleCadastro3}>
-            <TextButton> Cadastrar </TextButton>
-          </NextButton>
+
+        <NextButton onPress={handleCadastro3}>
+          <TextButton> Cadastrar </TextButton>
+        </NextButton>
       </Form>
 
     </Container>
@@ -171,41 +179,7 @@ const styles = StyleSheet.create({
   labelError: {
     color: '#ff375b',
     marginBottom: windowHeight * 0.02, // Use uma porcentagem da altura da tela para a margem inferior
-  },
-
-
-  // container: {
-  //   flex: 1,
-  //   backgroundColor: '#2f56b6',
-  //   justifyContent: 'center',
-  // },
-  // form: {
-  //   backgroundColor: '#fff',
-  //   flex: 1,
-  //   borderRadius: 10,
-  //   padding: windowWidth * 0.05, // Use uma porcentagem da largura da tela para o padding
-  // },
-  // titulo: {
-  //   fontSize: windowWidth * 0.06, // Use uma porcentagem da largura da tela para o tamanho da fonte
-  //   color: '#fff',
-  //   textAlign: 'center',
-  // },
-  // subTitulo: {
-  //   fontSize: windowWidth * 0.045, // Use uma porcentagem da largura da tela para o tamanho da fonte
-  //   color: '#fff',
-  //   marginTop: windowHeight * 0.01, // Use uma porcentagem da altura da tela para a margem superior
-  //   textAlign: 'center',
-  //   marginBottom: windowHeight * 0.03, // Use uma porcentagem da altura da tela para a margem inferior
-  // },
-  // input: {
-  //   height: windowHeight * 0.05, // Use uma porcentagem da altura da tela para a altura do input
-  //   borderColor: 'gray',
-  //   borderWidth: 1,
-  //   marginBottom: windowHeight * 0.01, // Use uma porcentagem da altura da tela para a margem inferior
-  //   paddingHorizontal: windowWidth * 0.03, // Use uma porcentagem da largura da tela para o padding horizontal
-  // },
-
-
+  }
 });
 
 export default CadastroCuidador3;

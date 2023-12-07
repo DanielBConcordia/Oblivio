@@ -1,11 +1,13 @@
-import React from "react";
-import { useState } from "react";
+import React, { useState } from "react";
 import { StyleSheet, Dimensions, Text } from "react-native";
+
 import * as yup from "yup";
+import axios from "axios";
 import { useNavigation } from "@react-navigation/native";
+
 import { useFormContext } from "../../../Contexts/FormContext2";
 import { useUser } from "../../../Contexts/UserContext";
-import axios from "axios";
+
 
 import {
   FormInput,
@@ -40,7 +42,7 @@ const CadastroPaciente2 = () => {
   const [isFocused, setIsFocused] = useState(false);
 
   const { formData } = useFormContext();
-  const { userData } = useUser();
+  const { userData, submitLogin } = useUser();
 
   const navigation = useNavigation();
 
@@ -63,11 +65,37 @@ const CadastroPaciente2 = () => {
     };
 
     try {
-     await axios.post(
-        "http://oblivio-api.vercel.app/paciente/cad",
-        body,
-        headers
-      );
+      const response = await axios.post("http://oblivio-api.vercel.app/paciente/cad", body, headers);
+
+      if (response.status === 201) {
+        try {
+          console.log(response.data.id)
+          const pacienteId = response.data.id;
+
+          let bodyMed = {
+            descricao: medicamento,
+            quantidade: quantidade,
+            hora: horarios,
+            paciente: pacienteId
+          }
+
+          let bodyAlergia = {
+            descricao: alergia,
+            paciente: pacienteId
+          }
+
+          const medResponse = await axios.post('https://oblivio-api.vercel.app/remedio/cad', bodyMed, headers)
+
+          const alergResponse = await axios.post('https://oblivio-api.vercel.app/alergia/cad', bodyAlergia, headers)
+
+          console.log(medResponse.data);
+          console.log(alergResponse.data);
+
+        } catch (error) {
+          console.log('Erro ao cadastrar alergia e remedio', error)
+        }
+      }
+
     } catch (error) {
       console.log("Erro ao cadastrar", error);
     }
@@ -120,9 +148,9 @@ const CadastroPaciente2 = () => {
         <FormInput
           style={[
             errors.medicamento &&
-              formSubmitted &&
-              styles.inputError &&
-              isFocused,
+            formSubmitted &&
+            styles.inputError &&
+            isFocused,
           ]}
           placeholder="Digite seu medicamento"
           onChangeText={(text) => setMedicamento(text)}
@@ -139,8 +167,6 @@ const CadastroPaciente2 = () => {
           placeholder="Digite a quantidade"
           value={quantidade}
           onChangeText={(text) => setQuantidade(text)}
-          keyboardType="numeric"
-          maxLength={10}
         />
         {errors.quantidade && formSubmitted && (
           <Text style={styles.labelError}> {errors.quantidade} </Text>
@@ -173,9 +199,9 @@ const CadastroPaciente2 = () => {
         <FormInput
           style={[
             errors.temperamento &&
-              formSubmitted &&
-              styles.inputError &&
-              isFocused,
+            formSubmitted &&
+            styles.inputError &&
+            isFocused,
           ]}
           placeholder="Digite o temperamento"
           onChangeText={(text) => setTemperamento(text)}
